@@ -1,5 +1,7 @@
 <template>
-  <div>123</div>
+  <div>
+    <el-button type="primary">123123</el-button>
+  </div>
 </template>
 
 <script>
