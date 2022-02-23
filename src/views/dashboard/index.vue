@@ -1,12 +1,29 @@
 <template>
   <div>
-    <el-button type="primary">123123</el-button>
+    <el-button type="primary" @click="getValue">123123</el-button>
+    <el-button type="primary" @click="alertTip">1111</el-button>
   </div>
 </template>
 
 <script>
-export default {};
+import { getValue, getValue2 } from "./indexApi";
+export default {
+  mounted() {},
+  methods: {
+    getValue() {
+      console.log(1);
+      getValue();
+      getValue2();
+    },
+    alertTip() {
+      this.$message.success("66666");
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+.el-button {
+  width: 100px;
+}
 </style>
