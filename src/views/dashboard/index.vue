@@ -11,7 +11,6 @@ export default {
   mounted() {},
   methods: {
     getValue() {
-      console.log(1);
       getValue();
       getValue2();
     },

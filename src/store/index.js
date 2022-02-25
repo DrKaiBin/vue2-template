@@ -28,7 +28,10 @@ const modules = moduleFiles.keys().reduce((modules, modulePath) => {
 
 // 创建状态管理模式
 const store = new Vuex.Store({
-    modules
+    modules,
+    actions: {
+        test() {}
+    }
 })
 
 export default store

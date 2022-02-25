@@ -1,55 +1,44 @@
 
-const tokens = {
+const idCards = {
+  // 超级管理员
   admin: {
-    token: 'admin-token'
-  },
-  editor: {
-    token: 'editor-token'
+    token: 'admin-token',
+    password: 'admin123'
   }
 }
 
 const users = {
-  'admin-token': {
-    roles: ['admin'],
-    introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+  'admin': {
     name: 'Super Admin'
-  },
-  'editor-token': {
-    roles: ['editor'],
-    introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal Editor'
   }
 }
 
 module.exports = [
   // user login
   {
-    url: '/vue-element-admin/user/login',
+    url: '/user/login',
     type: 'post',
     response: config => {
-      const { username } = config.body
-      const token = tokens[username]
-
+      const { userId, userPassword } = config.body
+      const idCard = idCards[userId]
       // mock error
-      if (!token) {
+      if (!idCard || userPassword !== idCard.password) {
         return {
           code: 60204,
-          message: 'Account and password are incorrect.'
+          message: '账号或密码错误'
         }
       }
 
       return {
         code: 20000,
-        data: token
+        data: idCard.token
       }
     }
   },
 
   // get user info
   {
-    url: '/vue-element-admin/user/info*',
+    url: '/user/info',
     type: 'get',
     response: config => {
       const { token } = config.query
@@ -72,7 +61,7 @@ module.exports = [
 
   // user logout
   {
-    url: '/vue-element-admin/user/logout',
+    url: '/user/logout',
     type: 'post',
     response: () => {
       return {
@@ -90,26 +79,6 @@ module.exports = [
         code: 200,
         data: {
           result: 666
-        }
-      }
-    }
-  },
-
-  {
-    url: '/ssss',
-    type: 'get',
-    response: async () => {
-      await new Promise((resolve) => {
-        console.log(778888);
-        setTimeout(() => {
-          console.log(8888);
-          resolve()
-        }, 5000)
-      })
-      return {
-        code: 200,
-        data: {
-          result: 888
         }
       }
     }

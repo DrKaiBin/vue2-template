@@ -37,7 +37,13 @@ const responseFake = (url, type, respond) => {
     url: new RegExp(`${url}`),
     type: type || 'get',
     response(req, res) {
+      // if (url === '/ssss') {
+      //   setTimeout(() => {
+      //     res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+      //   }, 5000)
+      // } else {
       res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+      // }
     }
   }
 }

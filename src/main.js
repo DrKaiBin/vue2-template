@@ -2,7 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import '@/styles/elementUiStyle/theme/index.css'
 import { Button, Select } from 'element-ui';
-import MessageTip from '@/utils/MessageTip'
+import MessageTip from '@/utils/messageTip'
+import '@/router/permission'
 Vue.use(Button)
 Vue.use(Select)
 

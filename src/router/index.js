@@ -7,8 +7,13 @@ Vue.use(Router)
 const syncRoutes = [
     {
         path: '/',
-        name: '主页',
+        name: 'Dashboard',
         component: () => import('@/views/dashboard/index')
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import('@/views/login/index')
     }
 ]
 
@@ -39,7 +44,7 @@ console.log(asyncRoutes)
 // 创建路由
 const createRouter = () => new Router({
     scrollbarBehavior: () => ({ y: 0 }),
-    routes: [...syncRoutes, ...asyncRoutes]
+    routes: [...syncRoutes]
 })
 
 const router = createRouter()
