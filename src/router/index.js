@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import treeDataBuilder from '@/utils/treeDataBuilder'
 // 模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 Vue.use(Router)
 
@@ -39,7 +40,13 @@ const asyncRoutes = routeFiles.keys().reduce((routes, routePath) => {
   return routes
 }, [])
 
-console.log(asyncRoutes)
+console.log(
+  123123,
+  treeDataBuilder({
+    dataList: [...asyncRoutes],
+    rootNode: { id: 'layout', name: '根节点' },
+  })
+)
 
 // 创建路由
 const createRouter = () =>
