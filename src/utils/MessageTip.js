@@ -19,61 +19,77 @@
 import { Message } from 'element-ui'
 import { cloneDeep } from 'loadsh'
 
-function MessageTip() { }
+function MessageTip() {}
 
 // 基础配置
 const baseOptions = {
-    showClose: true,
-    duration: 2000
+  showClose: true,
+  duration: 2000,
 }
 
 /**
  * @description 状态: 成功提示
  **/
 MessageTip.success = (msg, otherOptions) => {
-    const baseOpt = cloneDeep(baseOptions)
-    const msgOpt = Object.assign(baseOpt, {
-        message: msg,
-        type: 'success',
-    }, otherOptions)
+  const baseOpt = cloneDeep(baseOptions)
+  const msgOpt = Object.assign(
+    baseOpt,
+    {
+      message: msg,
+      type: 'success',
+    },
+    otherOptions
+  )
 
-    Message(msgOpt)
+  Message(msgOpt)
 }
 
 /**
  * @description 状态: 警告提示
  **/
 MessageTip.warning = (msg, otherOptions) => {
-    const baseOpt = cloneDeep(baseOptions)
-    const msgOpt = Object.assign(baseOpt, {
-        message: msg,
-        type: 'warning',
-    }, otherOptions)
-    Message(msgOpt)
+  const baseOpt = cloneDeep(baseOptions)
+  const msgOpt = Object.assign(
+    baseOpt,
+    {
+      message: msg,
+      type: 'warning',
+    },
+    otherOptions
+  )
+  Message(msgOpt)
 }
 
 /**
  * @description 状态: 信息提示
  **/
 MessageTip.info = (msg, otherOptions) => {
-    const baseOpt = cloneDeep(baseOptions)
-    const msgOpt = Object.assign(baseOpt, {
-        message: msg,
-        type: 'info',
-    }, otherOptions)
-    Message(msgOpt)
+  const baseOpt = cloneDeep(baseOptions)
+  const msgOpt = Object.assign(
+    baseOpt,
+    {
+      message: msg,
+      type: 'info',
+    },
+    otherOptions
+  )
+  Message(msgOpt)
 }
 
 /**
  * @description 状态: 错误提示
  **/
 MessageTip.error = (msg, otherOptions) => {
-    const baseOpt = cloneDeep(baseOptions)
-    const msgOpt = Object.assign(baseOpt, {
-        message: msg,
-        type: 'error',
-    }, otherOptions)
-    Message(msgOpt)
+  const baseOpt = cloneDeep(baseOptions)
+  const msgOpt = Object.assign(
+    baseOpt,
+    {
+      message: msg,
+      type: 'error',
+    },
+    otherOptions
+  )
+  Message(msgOpt)
 }
 
 export default MessageTip

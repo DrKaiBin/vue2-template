@@ -5,16 +5,16 @@ Vue.use(Router)
 
 // 路由列表
 const syncRoutes = [
-    {
-        path: '/',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index')
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: () => import('@/views/login/index')
-    }
+  {
+    path: '/',
+    name: 'Dashboard',
+    component: () => import('@/views/dashboard/index'),
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index'),
+  },
 ]
 
 /**
@@ -33,26 +33,27 @@ const syncRoutes = [
 const routeFiles = require.context('./routes', true, /\.js$/)
 
 const asyncRoutes = routeFiles.keys().reduce((routes, routePath) => {
-    // const routeName = routePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-    const value = routeFiles(routePath)
-    routes.push(value.default)
-    return routes
+  // const routeName = routePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = routeFiles(routePath)
+  routes.push(value.default)
+  return routes
 }, [])
 
 console.log(asyncRoutes)
 
 // 创建路由
-const createRouter = () => new Router({
+const createRouter = () =>
+  new Router({
     scrollbarBehavior: () => ({ y: 0 }),
-    routes: [...syncRoutes]
-})
+    routes: [...syncRoutes],
+  })
 
 const router = createRouter()
 
 // 路由重置，常用于权限切换，改变路由
 export function resetRouter() {
-    const newMatchRouter = createRouter()
-    router.matcher = newMatchRouter.matcher
+  const newMatchRouter = createRouter()
+  router.matcher = newMatchRouter.matcher
 }
 
 export default router

@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios'
 // import Loading from 'element-ui'
 
 /*start-------------------------------重复请求-------------------------------------------*/
 // 存储PendingKey对应请求
-const pendingMap = new Map();
+const pendingMap = new Map()
 
 /**
  * @description 生成唯一的每个请求的唯一key
@@ -11,9 +11,9 @@ const pendingMap = new Map();
  * @returns [url, method, JSON.stringify(params), JSON.stringify(data)].join('&')
  */
 export function getPendingKey(config) {
-  let { url, method, params, data } = config;
-  if (typeof data === "string") data = JSON.parse(data); // response里面返回的config.data是个字符串对象
-  return [url, method, JSON.stringify(params), JSON.stringify(data)].join("&");
+  let { url, method, params, data } = config
+  if (typeof data === 'string') data = JSON.parse(data) // response里面返回的config.data是个字符串对象
+  return [url, method, JSON.stringify(params), JSON.stringify(data)].join('&')
 }
 
 /**
@@ -21,14 +21,14 @@ export function getPendingKey(config) {
  * @param {*} config axios中的config参数
  */
 export function addPending(config) {
-  const pendingKey = getPendingKey(config);
+  const pendingKey = getPendingKey(config)
   config.cancelToken =
     config.cancelToken ||
     new axios.CancelToken((cancel) => {
       if (!pendingMap.has(pendingKey)) {
-        pendingMap.set(pendingKey, cancel);
+        pendingMap.set(pendingKey, cancel)
       }
-    });
+    })
 }
 
 /**
@@ -36,11 +36,11 @@ export function addPending(config) {
  * @param {*} config
  */
 export function removePending(config) {
-  const pendingKey = getPendingKey(config);
+  const pendingKey = getPendingKey(config)
   if (pendingMap.has(pendingKey)) {
-    const cancelToken = pendingMap.get(pendingKey);
-    cancelToken(pendingKey);
-    pendingMap.delete(pendingKey);
+    const cancelToken = pendingMap.get(pendingKey)
+    cancelToken(pendingKey)
+    pendingMap.delete(pendingKey)
   }
 }
 
@@ -51,7 +51,7 @@ export function removePending(config) {
 export const LoadingInstance = {
   _target: null,
   _count: 0,
-};
+}
 
 /**
  * @description 关闭Loading层实例
@@ -59,21 +59,20 @@ export const LoadingInstance = {
  */
 export function closeLoading(_options, LoadingInstance) {
   // LoadingInstance._target.close()
-  if (_options.loading && LoadingInstance._count > 0) LoadingInstance._count--;
+  if (_options.loading && LoadingInstance._count > 0) LoadingInstance._count--
   if (LoadingInstance._count === 0) {
-    LoadingInstance._target.close();
-    LoadingInstance._target = null;
+    LoadingInstance._target.close()
+    LoadingInstance._target = null
   }
 }
 
 /*end-------------------------------API-Loading---------------------------------------------*/
 
-
 export function errorDeal(error, checkCode) {
-    console.log(666, error);
-    if (checkCode) {
-        return {
-            isFail: true
-        }
+  console.log(666, error)
+  if (checkCode) {
+    return {
+      isFail: true,
     }
+  }
 }

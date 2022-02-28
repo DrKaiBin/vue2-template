@@ -12,15 +12,15 @@ export default {
     // 登录
     login() {
       const user = {
-        userId: "admin",
-        userPassword: "admin123",
+        userId: 'admin',
+        userPassword: 'admin123',
       }
       this.$store.dispatch('user/login', user).then(() => {
         this.$router.push('/')
       })
     },
   },
-};
+}
 </script>
 
 <style></style>

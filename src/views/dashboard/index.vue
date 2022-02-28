@@ -6,19 +6,19 @@
 </template>
 
 <script>
-import { getValue, getValue2 } from "./indexApi";
+import { getValue, getValue2 } from './indexApi'
 export default {
   mounted() {},
   methods: {
     getValue() {
-      getValue();
-      getValue2();
+      getValue()
+      getValue2()
     },
     alertTip() {
-      this.$message.success("66666");
+      this.$message.success('66666')
     },
   },
-};
+}
 </script>
 
 <style lang="scss">

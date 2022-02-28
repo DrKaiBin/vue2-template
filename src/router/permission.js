@@ -1,6 +1,6 @@
-import router from "./index";
-import { getToken } from "@/utils/token";
-const whiteList = ["/login", "/auth-redirect"];
+import router from './index'
+import { getToken } from '@/utils/token'
+const whiteList = ['/login', '/auth-redirect']
 router.beforeEach((to, from, next) => {
   const token = getToken()
   // 获取token， 已有则免登录
@@ -10,13 +10,13 @@ router.beforeEach((to, from, next) => {
       next('/')
     } else {
       // 是否已获取信息
-      next();
+      next()
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
-      next();
+      next()
     } else {
-      next("/login");
+      next('/login')
     }
   }
-});
+})

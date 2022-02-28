@@ -1,14 +1,14 @@
-import axios from "axios";
-import { Loading } from "element-ui";
-import MessageTip from "../messageTip";
-import { cloneDeep } from "loadsh";
+import axios from 'axios'
+import { Loading } from 'element-ui'
+import MessageTip from '../MessageTip'
+import { cloneDeep } from 'loadsh'
 import {
   addPending,
   removePending,
   LoadingInstance,
   closeLoading,
   errorDeal,
-} from "./axiosUtils";
+} from './axiosUtils'
 
 // 基础自定义配置
 const baseCustomOptions = {
@@ -17,85 +17,85 @@ const baseCustomOptions = {
   reductDataFormat: true, // 是否开启简洁的数据结构响应, 默认为true
   errorMessageShow: true, // 是否开启接口错误信息展示,默认为true
   codeMessageShow: false, // 是否开启code不为0时的信息提示, 默认为false
-};
+}
 
 // 基础Loading配置
 const baseLoadingOptions = {
   lock: true,
-  text: "加载中...",
-  spinner: "el-icon-loading",
-  background: "rgba(0, 0, 0, 0.7)",
-};
+  text: '加载中...',
+  spinner: 'el-icon-loading',
+  background: 'rgba(0, 0, 0, 0.7)',
+}
 
 export function request(axiosConfig, customOptions, loadingOptions) {
   // 如果未设置axiosConfig，直接返回并报错
   if (!axiosConfig) {
-    MessageTip.error("未配置axiosConfig!");
-    return;
+    MessageTip.error('未配置axiosConfig!')
+    return
   }
   // 合并自定义配置
   const mergeCustomOptions = Object.assign(
     {},
     cloneDeep(baseCustomOptions),
     customOptions
-  );
+  )
 
   // 合并Loading配置
   const mergeLoadingOptions = Object.assign(
     {},
     cloneDeep(baseLoadingOptions),
     loadingOptions
-  );
+  )
 
   // 初始化axios实例
   const service = axios.create({
     // baseURL: 'http://localhost:8080', // 设置统一的请求前缀
     timeout: 10000, // 设置统一的超时时长
-  });
+  })
 
   /**
    * 请求拦截
    **/
   service.interceptors.request.use((config) => {
-    mergeCustomOptions.repeatequestancel && removePending(config); // 删除重复请求
-    mergeCustomOptions.repeatequestancel && addPending(config); // 添加重复请求
+    mergeCustomOptions.repeatequestancel && removePending(config) // 删除重复请求
+    mergeCustomOptions.repeatequestancel && addPending(config) // 添加重复请求
 
     config['headers']
     // mergeCustomOptions.loading为true, 创建loading实例
     if (mergeCustomOptions.loading) {
-      LoadingInstance._count++;
+      LoadingInstance._count++
       if (LoadingInstance._count === 1) {
-        LoadingInstance._target = Loading.service(mergeLoadingOptions);
+        LoadingInstance._target = Loading.service(mergeLoadingOptions)
       }
     }
-    return config;
-  });
+    return config
+  })
 
   /**
    * 响应拦截
    **/
   service.interceptors.response.use(
     (response) => {
-      mergeCustomOptions.repeatequestancel && removePending(response.config); // 删除重复请求
+      mergeCustomOptions.repeatequestancel && removePending(response.config) // 删除重复请求
       mergeCustomOptions.loading &&
-        closeLoading(mergeCustomOptions, LoadingInstance); // 关闭loading
+        closeLoading(mergeCustomOptions, LoadingInstance) // 关闭loading
       // 默认返回响应后的data
       if (mergeCustomOptions.reductDataFormat)
-        return Promise.resolve(response.data);
-      return Promise.resolve(response);
+        return Promise.resolve(response.data)
+      return Promise.resolve(response)
     },
     (error) => {
       error.config &&
         mergeCustomOptions.repeatequestancel &&
-        removePending(error.config); // 删除重复请求
+        removePending(error.config) // 删除重复请求
       mergeCustomOptions.loading &&
-        closeLoading(mergeCustomOptions, LoadingInstance); // 关闭loading
-      errorDeal(JSON.parse(JSON.stringify(error)));
-      return Promise.reject(error);
+        closeLoading(mergeCustomOptions, LoadingInstance) // 关闭loading
+      errorDeal(JSON.parse(JSON.stringify(error)))
+      return Promise.reject(error)
     }
-  );
+  )
 
-  return service(axiosConfig);
+  return service(axiosConfig)
 }
 
-export default request;
+export default request
