@@ -28,11 +28,11 @@ function treeDataBuilder({ dataList, rootNode, treeConfig, nodeFilterArr }) {
       const parentId = getParentIdFun(node)
       const parentNode = nodeMap.get(parentId)
       if (nodeFilter(node)) continue
+      if (parentNode == null) continue
       // 添加children
       if (parentNode[treeConfig.childrenKey] == null) {
         parentNode[treeConfig.childrenKey] = []
       }
-      if (parentNode == null) continue
       parentNode[treeConfig.childrenKey].push(node)
       dataListCp.splice(i, 1)
       i--

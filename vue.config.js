@@ -1,22 +1,24 @@
-const path = require('path')
+const path = require("path");
 function resolve(dir) {
-    return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 module.exports = {
-    devServer: {
-        open: true,
-        // before(app) {
-        //     app.get("/parameter/query", (req, res, next) => {
-        //         res.json(res);
-        //     });
-        // }
-        before: require('./mock/mock-server.js')
+  devServer: {
+    open: true,
+    before: require("./mock/mock-server.js"),
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `@import "~@/styles/mixins.scss";@import "~@/styles/variables.scss";`,
+      },
     },
-    configureWebpack: {
-        resolve: {
-            alias: {
-                '@': resolve('src')
-            }
-        }
-    }
-}
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "@": resolve("src"),
+      },
+    },
+  },
+};

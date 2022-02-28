@@ -1,9 +1,22 @@
 <template>
-  <div></div>
+  <div class="app-main">
+    <div class="top-menu">
+      <top-menu /> 
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+import TopMenu from './components/TopMenu'
+export default {
+  components: {
+    TopMenu
+  }
+}
 </script>
 
-<style></style>
+<style lang="scss">
+.app-main {
+  @include wh100();
+}
+</style>

@@ -2,6 +2,7 @@
   <div>
     <el-button type="primary" @click="getValue">123123</el-button>
     <el-button type="primary" @click="alertTip">1111</el-button>
+    <router-view></router-view>
   </div>
 </template>
 

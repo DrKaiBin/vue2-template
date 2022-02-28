@@ -24,16 +24,19 @@ const testRoutes = [
     id: 'testIndex',
     parentId: 'layout',
     path: '/',
-    component: () => import('@/views/dashboard/index'),
+    title: '测试模块',
+    component: () => import('@/layout/index'),
   },
   {
     id: 'testSafe',
     parentId: 'testIndex',
+    title: '测试安全',
     component: () => import('@/views/dashboard/index'),
   },
   {
     id: 'testComponent',
     parentId: 'testIndex',
+    title: '测试组件',
     component: () => import('@/views/dashboard/index'),
   },
 ]
