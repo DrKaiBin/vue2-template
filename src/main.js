@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import '@/styles/elementUiStyle/theme/index.css'
 import '@/styles/index.scss'
-import { Button, Select } from 'element-ui'
 import MessageTip from '@/utils/MessageTip'
 import '@/router/permission'
-Vue.use(Button)
-Vue.use(Select)
+import '@/config/registerEleComponetns'
 
 Vue.prototype.$message = MessageTip
 
