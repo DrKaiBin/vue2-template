@@ -1,6 +1,6 @@
 import router from './index'
 import { getToken } from '@/utils/token'
-const whiteList = ['/login', '/auth-redirect']
+const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
   const token = getToken()
   // 获取token， 已有则免登录

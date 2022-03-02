@@ -3395,6 +3395,11 @@ electron-to-chromium@^1.4.17:
   resolved "https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.71.tgz#17056914465da0890ce00351a3b946fd4cd51ff6"
   integrity sha512-Hk61vXXKRb2cd3znPE9F+2pLWdIOmP7GjiTj45y6L3W/lO+hSnUSUhq+6lEaERWBdZOHbk2s3YV5c9xVl3boVw==
 
+element-theme-chalk@^2.15.6:
+  version "2.15.6"
+  resolved "https://registry.npmmirror.com/element-theme-chalk/-/element-theme-chalk-2.15.6.tgz#54960c5d39834fbe45e3f94c95d16ca62032ab4f"
+  integrity sha512-xz5drQxpid6Yw0zETIVprZiPoZvt6dxpTthkDn8LxYg+F+3Yh1LThCEWutTHNnDKjfQkG9JqbNHsXMmCSr4vrA==
+
 element-ui@^2.15.6:
   version "2.15.6"
   resolved "https://registry.npmmirror.com/element-ui/-/element-ui-2.15.6.tgz#c9609add35af5a686a4b7685dc1d757c75e01df3"

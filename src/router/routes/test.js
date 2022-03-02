@@ -39,6 +39,36 @@ const testRoutes = [
     title: '测试组件',
     component: () => import('@/views/dashboard/index'),
   },
+  {
+    id: 'testComponent1',
+    parentId: 'testComponent',
+    title: '测试组件',
+    component: () => import('@/views/dashboard/index'),
+  },
+  {
+    id: 'testComponent2',
+    parentId: 'testComponent',
+    title: '测试组件',
+    component: () => import('@/views/dashboard/index'),
+  },
+  {
+    id: 'testComponent1-1',
+    parentId: 'testComponent1',
+    title: '测试组件1-1',
+    component: () => import('@/views/dashboard/index'),
+  },
+  {
+    id: 'testComponent1-2',
+    parentId: 'testComponent1',
+    title: '测试组件1-2',
+    component: () => import('@/views/dashboard/index'),
+  },
+  {
+    id: 'testComponent1-3',
+    parentId: 'testComponent1',
+    title: '测试组件1-3',
+    component: () => import('@/views/dashboard/index'),
+  },
 ]
 
 export default testRoutes

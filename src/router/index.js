@@ -9,10 +9,20 @@ const syncRoutes = [
   {
     path: '/',
     name: 'Dashboard',
-    component: () => import('@/views/dashboard/index'),
+    component: () => import('@/layout/index'),
     meta: {
-      title: '主页'
-    }
+      title: '主页',
+    },
+    children: [
+      {
+        path: '/',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: {
+          title: '主页',
+        },
+      },
+    ],
   },
   {
     path: '/login',
@@ -20,8 +30,8 @@ const syncRoutes = [
     component: () => import('@/views/login/index'),
     meta: {
       title: '登录',
-      hidden: true
-    }
+      hidden: true,
+    },
   },
 ]
 
@@ -45,7 +55,7 @@ const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
   // const routeName = routePath.replace(/^\.\/(.*)\.\w+$/, '$1')
   const value = routeFiles(routePath)
   if (value.default != null) {
-    value.default.forEach(element => {
+    value.default.forEach((element) => {
       // 路径设置
       if (element.parentId === 'layout') element['path'] = '/' + element.id
       else element['path'] = element.id
@@ -54,10 +64,10 @@ const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
       // meta属性设置
       element['meta'] = {
         title: element.title ? element.title : '未设置标题',
-        hidden: element.hidden ? element.hidden : false
+        hidden: element.hidden ? element.hidden : false,
       }
       routes.push(element)
-    });
+    })
   }
   return routes
 }, [])

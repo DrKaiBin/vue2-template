@@ -1,15 +1,17 @@
 const chokidar = require('chokidar')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser') // 请求体解析中间件
 const chalk = require('chalk')
 const path = require('path')
 const Mock = require('mockjs')
 
 const mockDir = path.join(process.cwd(), 'mock')
 
+// 注册路由
 function registerRoutes(app) {
   let mockLastIndex
   const { mocks } = require('./index.js')
-  const mocksForServer = mocks.map(route => {
+  //  注入Mock.mock
+  const mocksForServer = mocks.map((route) => {
     return responseFake(route.url, route.type, route.response)
   })
   for (const mock of mocksForServer) {
@@ -19,68 +21,75 @@ function registerRoutes(app) {
   const mockRoutesLength = Object.keys(mocksForServer).length
   return {
     mockRoutesLength: mockRoutesLength,
-    mockStartIndex: mockLastIndex - mockRoutesLength
+    mockStartIndex: mockLastIndex - mockRoutesLength,
   }
 }
 
 function unregisterRoutes() {
-  Object.keys(require.cache).forEach(i => {
+  Object.keys(require.cache).forEach((i) => {
     if (i.includes(mockDir)) {
       delete require.cache[require.resolve(i)]
     }
   })
 }
 
-// for mock server
+//  根据数据模板生成模拟数据
 const responseFake = (url, type, respond) => {
   return {
     url: new RegExp(`${url}`),
     type: type || 'get',
     response(req, res) {
-      // if (url === '/ssss') {
-      //   setTimeout(() => {
-      //     res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
-      //   }, 5000)
-      // } else {
-      res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
-      // }
-    }
+      res.json(
+        Mock.mock(respond instanceof Function ? respond(req, res) : respond)
+      )
+    },
   }
 }
 
-module.exports = app => {
+module.exports = (app) => {
   // parse app.body
   // https://expressjs.com/en/4x/api.html#req.body
+  // 解析 application/json
   app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }))
+  // 解析 application/x-www-form-urlencoded
+  app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    })
+  )
 
   const mockRoutes = registerRoutes(app)
   var mockRoutesLength = mockRoutes.mockRoutesLength
   var mockStartIndex = mockRoutes.mockStartIndex
 
-  // watch files, hot reload mock server
-  chokidar.watch(mockDir, {
-    ignored: /mock-server/,
-    ignoreInitial: true
-  }).on('all', (event, path) => {
-    if (event === 'change' || event === 'add') {
-      try {
-        // remove mock routes stack
-        app._router.stack.splice(mockStartIndex, mockRoutesLength)
+  // 监听文件修改，实现热更新
+  chokidar
+    .watch(mockDir, {
+      ignored: /mock-server/,
+      ignoreInitial: true,
+    })
+    .on('all', (event, path) => {
+      if (event === 'change' || event === 'add') {
+        try {
+          // 移除对应路由栈
+          app._router.stack.splice(mockStartIndex, mockRoutesLength)
 
-        // clear routes cache
-        unregisterRoutes()
+          // 清除路由缓存
+          unregisterRoutes()
 
-        const mockRoutes = registerRoutes(app)
-        mockRoutesLength = mockRoutes.mockRoutesLength
-        mockStartIndex = mockRoutes.mockStartIndex
+          //  重新注册路由
+          const mockRoutes = registerRoutes(app)
+          mockRoutesLength = mockRoutes.mockRoutesLength
+          mockStartIndex = mockRoutes.mockStartIndex
 
-        console.log(chalk.magentaBright(`\n > Mock Server hot reload success! changed  ${path}`))
-      } catch (error) {
-        console.log(chalk.redBright(error))
+          console.log(
+            chalk.magentaBright(
+              `\n > Mock Server hot reload success! changed  ${path}`
+            )
+          )
+        } catch (error) {
+          console.log(chalk.redBright(error))
+        }
       }
-    }
-  })
+    })
 }

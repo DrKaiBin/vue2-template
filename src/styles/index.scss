@@ -1,8 +1,13 @@
-html, body {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    #app {
-        @include wh100();
-    }
+@import './element-ui.scss';
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+
+  #app {
+    @include wh100();
+  }
 }

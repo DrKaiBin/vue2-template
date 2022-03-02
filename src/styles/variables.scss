@@ -1,0 +1,18 @@
+// 颜色变量
+$color-primary: #5177ff;
+$color-primary-50: rgba($color-primary, .5);
+// $color-primary-50: mix(#ffffff, $color-primary, 50%);
+$color-primary-10: rgba($color-primary, .1);
+
+
+
+
+/** 布局框架 **/
+
+$--layout-head--height: 56px;
+
+// 顶部导航栏变量
+$--top-menu-background: #001018;
+$--top-menu-item-background--hover: $color-primary-50;
+$--top-menu-item-text: #e0e1e5;
+$--top-menu-item-text--hover: $color-primary;
