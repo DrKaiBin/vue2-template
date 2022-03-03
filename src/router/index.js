@@ -10,12 +10,13 @@ const syncRoutes = [
     path: '/',
     name: 'Dashboard',
     component: () => import('@/layout/index'),
+    redirect: '/dashboard',
     meta: {
       title: '主页',
     },
     children: [
       {
-        path: '/',
+        path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: {

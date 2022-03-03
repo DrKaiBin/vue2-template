@@ -6,7 +6,7 @@
           :routes="menuRoutes"
           :navBarType="navBarType"
           mode="horizontal"
-          default-active="/"
+          :default-active="defaultOpeneds"
           router
           @select="changeTopMenuItem"
         ></tier-menu>
@@ -16,10 +16,11 @@
       </div>
     </div>
     <div class="body">
-      <div class="side-menu" v-show="navBarType === 2 && sideRoute.length >= 1">
+      <div class="side-menu" :key="navBarType === 2 && sideRoute.length >= 1">
         <tier-menu
           :routes="sideRoute"
           :navBarType="1"
+          :default-active="defaultOpeneds"
           class="side-menu"
           mode="vertical"
           router
@@ -30,7 +31,9 @@
           'render-view',
           { 'has-side-menu': !(navBarType === 2 && sideRoute.length >= 1) },
         ]"
-      ></div>
+      >
+        <router-view></router-view>
+      </div>
     </div>
 
     <config-drawer ref="configDrawer"></config-drawer>
@@ -41,6 +44,7 @@
 import { mapState } from 'vuex'
 import TierMenu from './components/menu/TierMenu'
 import ConfigDrawer from './components/config/ConfigDrawer.vue'
+import { cloneDeep } from 'loadsh'
 export default {
   components: {
     TierMenu,
@@ -49,31 +53,55 @@ export default {
   data() {
     return {
       sideRoute: [],
+      defaultOpeneds: '/',
+      defaultOpendFrist: '',
     }
   },
   computed: {
     menuRoutes() {
       const _routes = this.$router.options.routes.filter((item) => {
+        if (!item.meta?.hidden) {
+          item.redirect = this.setMainRouteRedirect(item)
+        }
         return !item.meta?.hidden
       })
+      console.log(_routes)
       return _routes
     },
     ...mapState({
       navBarType: (state) => state.config.navBarType,
     }),
   },
-  mounted() {},
+  created() {
+    this.changeTopMenuItem(this.$route.path, false)
+  },
   methods: {
+    setMainRouteRedirect(route) {
+      let path = route.path === '/' ? '' : route.path
+      const fristChild = route.children.find((child) => {
+        return !child.meta?.hidden
+      })
+      path += '/' + fristChild.path
+      if (fristChild.children && fristChild.length > 0)
+        return this.setMainRouteRedirect(fristChild)
+      return path
+    },
     openConfigDrawer() {
       this.$refs['configDrawer'].openConfigDrawer()
     },
     changeTopMenuItem(indexPath) {
       if (this.navBarType === 2) {
-        const currentMenuRoute = this.menuRoutes.find((route) => {
-          return route.path === indexPath
+        const _currentMenuRoute = this.menuRoutes.find((route) => {
+          if (route.path !== '' || route.path !== '/') {
+            const basePath = indexPath.split('/')
+            return route.path.indexOf(basePath[1]) !== -1
+          }
         })
+
         let hasSide = 0
-        if (currentMenuRoute && currentMenuRoute.children) {
+        let currentMenuRoute
+        if (_currentMenuRoute && _currentMenuRoute.children) {
+          currentMenuRoute = cloneDeep(_currentMenuRoute)
           currentMenuRoute.children.map((child) => {
             if (child.meta && !child.meta.hidden) {
               child.path = currentMenuRoute.path + '/' + child.path
@@ -87,6 +115,9 @@ export default {
           this.sideRoute = []
         }
       }
+      this.$nextTick(() => {
+        this.defaultOpeneds = indexPath
+      })
     },
   },
 }
@@ -125,6 +156,7 @@ export default {
       height: 100%;
       float: left;
       background-color: rgba(155, 33, 111, 0.1);
+      padding: 20px;
       &.has-side-menu {
         width: 100%;
         height: 100%;

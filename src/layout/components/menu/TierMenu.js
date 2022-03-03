@@ -21,7 +21,10 @@ function setBaseMenu(
 
 function setMenuItem(h, route, menuItemProps) {
   return (
-    <ElMenuItem attrs={menuItemProps} index={route.path}>
+    <ElMenuItem
+      attrs={menuItemProps}
+      index={route.redirect ? route.redirect : route.path}
+    >
       {route.meta.title}
     </ElMenuItem>
   )
