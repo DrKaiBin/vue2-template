@@ -1,4 +1,5 @@
 @import './element-ui.scss';
+@import './variables.scss';
 
 html,
 body {
@@ -14,4 +15,90 @@ body {
 
 div {
   box-sizing: border-box;
+}
+
+/**
+  * 外层框架布局
+  **/
+.app-main {
+  @include wh100();
+
+  // 头部
+  .header {
+    width: 100%;
+    height: $--layout-head--height;
+    float: left;
+    padding: 0 $padding-base * 6;
+    background-color: $--header-background;
+
+    .logo-container {
+      width: 28%;
+      height: inherit;
+      float: left;
+
+      .company-logo {}
+
+      .project-logo {}
+    }
+
+    // 菜单
+    .menu {
+      width: calc(100% - 120px - 28%);
+      height: 100%;
+      float: left;
+      background-color: inherit;
+
+      .el-menu {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: inherit;
+        border-bottom: none;
+        color: $--top-menu-item-text;
+
+        &-item {
+          color: inherit;
+          height: inherit;
+          border-bottom: inherit;
+
+          &:not(.is-disabled):hover,
+          &.is-active {
+            font-weight: 550;
+            color: $--top-menu-item-text--hover;
+            background-color: $--top-menu-item-background--hover;
+          }
+        }
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
+    height: calc(100% - #{$--layout-head--height});
+    float: left;
+
+    .side-menu {
+      width: 256px;
+      height: 100%;
+      box-sizing: border-box;
+      float: left;
+
+      .is-custom-active {
+        color: $color-primary;
+      }
+    }
+
+    .render-view {
+      width: calc(100% - 256px);
+      height: 100%;
+      float: left;
+      background-color: rgba(155, 33, 111, 0.1);
+      padding: 20px;
+
+      &.has-side-menu {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }

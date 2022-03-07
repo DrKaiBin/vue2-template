@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ routeName }}
     <el-button type="primary" @click="getValue">123123</el-button>
     <el-button type="primary" @click="alertTip">1111</el-button>
   </div>
@@ -8,6 +9,11 @@
 <script>
 import { getValue, getValue2 } from './indexApi'
 export default {
+  computed: {
+    routeName() {
+      return this.$route.meta.title
+    },
+  },
   mounted() {},
   methods: {
     getValue() {

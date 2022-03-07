@@ -1,58 +1,55 @@
 <template>
   <div class="app-main">
     <div class="header">
+      <div class="logo-container"></div>
       <div class="menu" :key="navBarType">
-        <tier-menu
-          :routes="menuRoutes"
+        <top-menu
+          :menuRoutes="menuRoutes"
+          :defaultOpeneds="defaultOpeneds"
           :navBarType="navBarType"
-          mode="horizontal"
-          :default-active="defaultOpeneds"
-          router
           @select="changeTopMenuItem"
-        ></tier-menu>
+        />
       </div>
-      <div class="config">
+      <!-- <div class="config">
         <el-button type="primary" @click="openConfigDrawer">配置</el-button>
-      </div>
+      </div> -->
     </div>
     <div class="body">
-      <div class="side-menu" :key="navBarType === 2 && sideRoute.length >= 1">
-        <tier-menu
-          :routes="sideRoute"
-          :navBarType="1"
-          :default-active="defaultOpeneds"
+      <div class="side-menu" v-if="navBarType === 2 && sideRoutes.length >= 1">
+        <side-menu
           class="side-menu"
-          mode="vertical"
-          router
-        ></tier-menu>
+          :sideRoutes="sideRoutes"
+          :defaultOpeneds="defaultOpeneds"
+        />
       </div>
       <div
         :class="[
           'render-view',
-          { 'has-side-menu': !(navBarType === 2 && sideRoute.length >= 1) },
+          { 'has-side-menu': !(navBarType === 2 && sideRoutes.length >= 1) },
         ]"
       >
         <router-view></router-view>
       </div>
     </div>
-
     <config-drawer ref="configDrawer"></config-drawer>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import TierMenu from './components/menu/TierMenu'
+import TopMenu from './components/menu/TopMenu.vue'
+import SideMenu from './components/menu/SideMenu.vue'
 import ConfigDrawer from './components/config/ConfigDrawer.vue'
 import { cloneDeep } from 'loadsh'
 export default {
   components: {
-    TierMenu,
+    TopMenu,
     ConfigDrawer,
+    SideMenu,
   },
   data() {
     return {
-      sideRoute: [],
+      sideRoutes: [], // 侧边栏路由，为空时，不展示
       defaultOpeneds: '/',
       defaultOpendFrist: '',
     }
@@ -65,7 +62,6 @@ export default {
         }
         return !item.meta?.hidden
       })
-      console.log(_routes)
       return _routes
     },
     ...mapState({
@@ -110,9 +106,9 @@ export default {
           })
         }
         if (hasSide >= 2) {
-          this.sideRoute = currentMenuRoute.children
+          this.sideRoutes = currentMenuRoute.children
         } else {
-          this.sideRoute = []
+          this.sideRoutes = []
         }
       }
       this.$nextTick(() => {
@@ -123,45 +119,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.app-main {
-  @include wh100();
-  .header {
-    width: 100%;
-    height: $--layout-head--height;
-    float: left;
-    .menu {
-      width: calc(100% - 120px - 150px);
-      height: 100%;
-      float: left;
-    }
-    .config {
-      width: 80px;
-      height: 100%;
-      float: left;
-    }
-  }
-  .body {
-    width: 100%;
-    height: calc(100% - #{$--layout-head--height});
-    float: left;
-    .side-menu {
-      width: 256px;
-      height: 100%;
-      box-sizing: border-box;
-      float: left;
-    }
-    .render-view {
-      width: calc(100% - 256px);
-      height: 100%;
-      float: left;
-      background-color: rgba(155, 33, 111, 0.1);
-      padding: 20px;
-      &.has-side-menu {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

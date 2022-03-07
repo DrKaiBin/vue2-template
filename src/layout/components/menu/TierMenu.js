@@ -1,4 +1,7 @@
 import { cloneDeep } from 'loadsh'
+/**
+ * 设置
+ */
 function setBaseMenu(
   h,
   navBarType,
@@ -20,11 +23,12 @@ function setBaseMenu(
 }
 
 function setMenuItem(h, route, menuItemProps) {
+  const index = route.redirect ? route.redirect : route.path
+  // const isActive = router.history.current.path === index
+  // console.log(isActive, index)
+  // class={isActive ? 'is-custom-active' : ''}
   return (
-    <ElMenuItem
-      attrs={menuItemProps}
-      index={route.redirect ? route.redirect : route.path}
-    >
+    <ElMenuItem key={index} attrs={menuItemProps} index={index}>
       {route.meta.title}
     </ElMenuItem>
   )
