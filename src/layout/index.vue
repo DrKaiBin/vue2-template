@@ -1,7 +1,10 @@
 <template>
   <div class="app-main">
     <div class="header">
-      <div class="logo-container"></div>
+      <div class="logo-container">
+        <div class="company-logo"></div>
+        <div class="project-text">前端项目框架</div>
+      </div>
       <div class="menu" :key="navBarType">
         <top-menu
           :menuRoutes="menuRoutes"

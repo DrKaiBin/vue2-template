@@ -4,6 +4,13 @@ $color-primary-50: rgba($color-primary, .5);
 // $color-primary-50: mix(#ffffff, $color-primary, 50%);
 $color-primary-10: rgba($color-primary, .1);
 
+//  文字颜色
+$text-headline: #303133; // 大标题
+$text-regular: #606266; // 正文、图标图列、表格、分页
+$text-secondary: #909399; // 表头、表单、基础图标（下拉、叉）
+$text-tip-disabled: #c0c4cc; // 提示性文字、禁用文字、移上表单框颜色
+$text-background: #ffffff; // 填充色相背景时使用
+
 
 // 间距变量
 $padding-base: 4px;

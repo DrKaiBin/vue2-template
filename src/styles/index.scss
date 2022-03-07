@@ -7,6 +7,7 @@ body {
   height: 100vh;
   margin: 0;
   box-sizing: border-box;
+  color: $text-regular;
 
   #app {
     @include wh100();
@@ -31,19 +32,37 @@ div {
     padding: 0 $padding-base * 6;
     background-color: $--header-background;
 
+    //  项目logo
     .logo-container {
-      width: 28%;
+      width: 380px;
       height: inherit;
       float: left;
 
-      .company-logo {}
+      .company-logo {
+        width: 180px;
+        height: calc(100% - 28px);
+        margin-top: 14px;
+        background-image: url('/images/logo/company-logo.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        float: left;
+      }
 
-      .project-logo {}
+      .project-text {
+        width: 200px;
+        height: 100%;
+        float: left;
+        color: $text-background;
+        font-size: 22px;
+        line-height: $--layout-head--height;
+      }
     }
+
 
     // 菜单
     .menu {
-      width: calc(100% - 120px - 28%);
+      width: calc(100% - 120px - 380px);
       height: 100%;
       float: left;
       background-color: inherit;
