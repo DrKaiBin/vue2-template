@@ -1,6 +1,18 @@
+/*
+ * @Description: 快速生成导航栏（树形结构）
+ * @Author: 张楷滨
+ * @Date: 2022-03-02 11:11:28
+ * @LastEditTime: 2022-03-08 14:37:39
+ * @LastEditors: 张楷滨
+ */
 import { cloneDeep } from 'loadsh'
+
 /**
- * 设置
+ * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-03-08 14:31:07
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
  */
 function setBaseMenu(
   h,
@@ -22,11 +34,18 @@ function setBaseMenu(
   )
 }
 
+/**
+ * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-03-08 14:33:52
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
+ * @param {*} h
+ * @param {*} route
+ * @param {*} menuItemProps
+ */
 function setMenuItem(h, route, menuItemProps) {
   const index = route.redirect ? route.redirect : route.path
-  // const isActive = router.history.current.path === index
-  // console.log(isActive, index)
-  // class={isActive ? 'is-custom-active' : ''}
   return (
     <ElMenuItem key={index} attrs={menuItemProps} index={index}>
       {route.meta.title}
@@ -34,6 +53,17 @@ function setMenuItem(h, route, menuItemProps) {
   )
 }
 
+/**
+ * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-03-08 14:37:15
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
+ * @param {*} h
+ * @param {*} route
+ * @param {*} subMenuProps
+ * @param {*} menuItemProps
+ */
 function setMenu(h, route, subMenuProps, menuItemProps) {
   if (route.children == null || route.children.length < 2) {
     return setMenuItem(h, route, menuItemProps)

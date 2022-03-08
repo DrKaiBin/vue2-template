@@ -13,6 +13,7 @@
     "element-ui": "^2.15.6",
     "js-cookie": "^3.0.1",
     "loadsh": "^0.0.4",
+    "screenfull": "5.1.0",
     "vue": "^2.6.11",
     "vue-router": "3.5.3",
     "vuex": "3.6.2"

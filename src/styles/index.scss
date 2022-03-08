@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-03-01 10:51:34
+ * @LastEditTime: 2022-03-08 15:49:56
+ * @LastEditors: 张楷滨
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \vue2-template\src\styles\index.scss
+ */
 @import './element-ui.scss';
 @import './variables.scss';
 
@@ -59,10 +67,9 @@ div {
       }
     }
 
-
     // 菜单
     .menu {
-      width: calc(100% - 120px - 380px);
+      width: calc(100% - 140px - 380px);
       height: 100%;
       float: left;
       background-color: inherit;
@@ -89,13 +96,61 @@ div {
         }
       }
     }
+
+    // 基础信息
+    .base-info {
+      width: 140px;
+      height: inherit;
+      float: left;
+
+      // 全屏按钮
+      .screen-full {
+        width: 20px;
+        height: inherit;
+        float: left;
+        display: flex;
+        align-items: center;
+
+        .el-icon-full-screen {
+          font-size: 20px;
+          cursor: pointer;
+          color: $text-background;
+        }
+      }
+
+      // 用户基础信息
+      .user-info {
+        width: calc(100% - 20px - #{$padding-base * 6});
+        height: inherit;
+        float: left;
+        display: flex;
+        align-items: center;
+        margin-left: $padding-base * 6;
+
+        .user-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: $text-regular;
+        }
+
+        .user-text {
+          width: calc(100% - 32px);
+          font-size: 14px;
+          padding-left: $padding-base * 2;
+          color: $text-background;
+        }
+      }
+    }
   }
 
+  // 内容区域
   .body {
     width: 100%;
     height: calc(100% - #{$--layout-head--height});
     float: left;
 
+    // 侧边栏
     .side-menu {
       width: 256px;
       height: 100%;
@@ -107,6 +162,7 @@ div {
       }
     }
 
+    // 路由渲染区域
     .render-view {
       width: calc(100% - 256px);
       height: 100%;

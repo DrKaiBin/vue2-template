@@ -13,6 +13,7 @@
           @select="changeTopMenuItem"
         />
       </div>
+      <base-info></base-info>
       <!-- <div class="config">
         <el-button type="primary" @click="openConfigDrawer">配置</el-button>
       </div> -->
@@ -42,13 +43,15 @@
 import { mapState } from 'vuex'
 import TopMenu from './components/menu/TopMenu.vue'
 import SideMenu from './components/menu/SideMenu.vue'
+import BaseInfo from './components/config/BaseInfo.vue'
 import ConfigDrawer from './components/config/ConfigDrawer.vue'
 import { cloneDeep } from 'loadsh'
 export default {
   components: {
     TopMenu,
-    ConfigDrawer,
     SideMenu,
+    BaseInfo,
+    ConfigDrawer,
   },
   data() {
     return {
