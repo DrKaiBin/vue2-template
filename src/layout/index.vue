@@ -1,10 +1,7 @@
 <template>
   <div class="app-main">
     <div class="header">
-      <div class="logo-container">
-        <div class="company-logo"></div>
-        <div class="project-text">前端项目框架</div>
-      </div>
+      <logo-info></logo-info>
       <div class="menu" :key="navBarType">
         <top-menu
           :menuRoutes="menuRoutes"
@@ -41,6 +38,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import LogoInfo from './components/config/LogoInfo.vue'
 import TopMenu from './components/menu/TopMenu.vue'
 import SideMenu from './components/menu/SideMenu.vue'
 import BaseInfo from './components/config/BaseInfo.vue'
@@ -48,6 +46,7 @@ import ConfigDrawer from './components/config/ConfigDrawer.vue'
 import { cloneDeep } from 'loadsh'
 export default {
   components: {
+    LogoInfo,
     TopMenu,
     SideMenu,
     BaseInfo,

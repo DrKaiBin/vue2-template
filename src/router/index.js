@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-03-01 10:51:34
+ * @LastEditTime: 2022-03-08 17:02:05
+ * @LastEditors: 张楷滨
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import treeDataBuilder from '@/utils/treeDataBuilder'
@@ -49,11 +56,10 @@ const syncRoutes = [
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext
 // 创建自己的上下文、在构建时在代码中解析
-const routeFiles = require.context('./routes', true, /\.js$/)
+const routeFiles = require.context('./modules', true, /\.js$/)
 
 // 动态获取modules中的路由
 const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
-  // const routeName = routePath.replace(/^\.\/(.*)\.\w+$/, '$1')
   const value = routeFiles(routePath)
   if (value.default != null) {
     value.default.forEach((element) => {

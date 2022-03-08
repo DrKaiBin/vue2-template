@@ -23,3 +23,6 @@ pnpm-debug.log*
 *.sw?
 
 public/images/logo/company-logo.svg
+doc/docs/.vuepress/.temp
+doc/docs/.vuepress/.cache
+yarn.lock

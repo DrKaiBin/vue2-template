@@ -16,7 +16,6 @@ const baseCustomOptions = {
   loading: false, // 是否开启loading层效果, 默认为false
   reductDataFormat: true, // 是否开启简洁的数据结构响应, 默认为true
   errorMessageShow: true, // 是否开启接口错误信息展示,默认为true
-  codeMessageShow: false, // 是否开启code不为0时的信息提示, 默认为false
 }
 
 // 基础Loading配置
