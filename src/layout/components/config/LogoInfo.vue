@@ -2,7 +2,7 @@
  * @Description: 顶部栏左侧logo
  * @Author: 张楷滨
  * @Date: 2022-03-08 18:56:15
- * @LastEditTime: 2022-03-08 19:21:08
+ * @LastEditTime: 2022-03-09 10:42:37
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -17,7 +17,7 @@ import { projectTitle } from '../../../../public/config/config'
 export default {
   computed: {
     projectTitle() {
-      return process.env.NODE_ENV === 'production'
+      return process.env.VUE_APP_SETTING_BY_WEB === 'true'
         ? projectTitle == null
           ? process.env.VUE_APP_PROJECT_TITLE
           : projectTitle

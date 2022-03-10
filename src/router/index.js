@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-08 17:02:05
+ * @LastEditTime: 2022-03-10 19:32:48
  * @LastEditors: 张楷滨
  */
 import Vue from 'vue'
@@ -42,7 +42,6 @@ const syncRoutes = [
     },
   },
 ]
-
 /**
  * 直接读取routes下的模块路由
  * 无需再次引入
@@ -54,38 +53,74 @@ const syncRoutes = [
  * export default xxRoutes
  */
 
-// https://webpack.js.org/guides/dependency-management/#requirecontext
-// 创建自己的上下文、在构建时在代码中解析
-const routeFiles = require.context('./modules', true, /\.js$/)
+const rolesByWeb = process.env.VUE_APP_ROLES_BY_WEB
 
-// 动态获取modules中的路由
-const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
-  const value = routeFiles(routePath)
-  if (value.default != null) {
-    value.default.forEach((element) => {
-      // 路径设置
-      if (element.parentId === 'layout') element['path'] = '/' + element.id
-      else element['path'] = element.id
-      // 组件名设置
-      element['name'] = element.id
-      // meta属性设置
-      element['meta'] = {
-        title: element.title ? element.title : '未设置标题',
-        hidden: element.hidden ? element.hidden : false,
+export function getModulesRoutes(routeList = []) {
+  const routeFiles = require.context('./modules', true, /\.js$/)
+  // 动态获取modules中的路由
+  const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
+    const value = routeFiles(routePath)
+    // 前端路由生成
+    if (rolesByWeb === 'true') {
+      if (value.default != null) {
+        const module = value.default
+        const keys = Object.keys(module)
+        keys.forEach((key) => {
+          const element = module[key]
+          // 路径设置
+          if (element.parentId === 'layout') element['path'] = '/' + element.id
+          else element['path'] = element.id
+          // 组件名设置
+          element['name'] = element.id
+          // meta属性设置
+          element['meta'] = {
+            title: element.title ? element.title : '未设置标题',
+            hidden: element.hidden ? element.hidden : false,
+          }
+          routes.push(element)
+        })
       }
-      routes.push(element)
-    })
-  }
-  return routes
-}, [])
-
-const tree = treeDataBuilder({
-  dataList: moduleRoutes,
-  rootNode: { id: 'layout', name: '根节点' },
-})
+      // 后端路由生成
+    } else {
+      if (value.default != null) {
+        const module = value.default
+        routeList.forEach((item) => {
+          const key = item.id
+          if (module[item.id] != null) {
+            const element = module[key]
+            // 路径设置
+            if (element.parentId === 'layout')
+              element['path'] = '/' + element.id
+            else element['path'] = element.id
+            // 组件名设置
+            element['name'] = element.id
+            // meta属性设置
+            element['meta'] = {
+              title: element.title ? item.title : '未设置标题',
+              hidden: element.hidden ? item.hidden : false,
+            }
+            routes.push(element)
+          } else {
+            console.error(`未找到组件：${item.id}`)
+          }
+        })
+      }
+    }
+    return routes
+  }, [])
+  return moduleRoutes
+}
 
 // 获取异步路由
-const asyncRoutes = tree['treeData'][0]['children']
+let asyncRoutes = []
+
+if (rolesByWeb === 'true') {
+  const tree = treeDataBuilder({
+    dataList: getModulesRoutes(),
+    rootNode: { id: 'layout', name: '根节点' },
+  })
+  asyncRoutes = tree['treeData'][0]['children']
+}
 
 // 创建路由
 const createRouter = () =>

@@ -1,5 +1,12 @@
+/*
+ * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-02-28 19:09:32
+ * @LastEditTime: 2022-03-10 18:38:30
+ * @LastEditors: 张楷滨
+ */
 import { getToken, setToken } from '@/utils/token'
-import { login, getUserInfo } from '@/api/user'
+import { login, getUserInfo, getUserRoute } from '@/api/user'
 const state = {
   name: '',
   roles: [],
@@ -36,8 +43,27 @@ const actions = {
   },
   // 获取用户store
   getUserInfo: ({ commit, state }) => {
-    getUserInfo({ token: state.token })
-    commit('SET_NAME', '张三')
+    return new Promise((resolve, reject) => {
+      getUserInfo({ token: state.token })
+        .then(() => {
+          getUserRoute({ userId: 1 })
+            .then((resp) => {
+              const backGroundRouteList = resp.result
+
+              // 获取对应组件
+              console.log(backGroundRouteList)
+              commit('SET_NAME', '张三')
+              resolve()
+            })
+            .catch(() => {
+              reject()
+            })
+        })
+        .catch(() => {
+          reject()
+        })
+    })
+
     // commit('SET_ROLES', '富豪')
     // commit('SET_TOKEN', '张三的Token')
   },
