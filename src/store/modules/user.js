@@ -2,14 +2,15 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:32
- * @LastEditTime: 2022-03-10 18:38:30
+ * @LastEditTime: 2022-03-11 18:33:11
  * @LastEditors: 张楷滨
  */
 import { getToken, setToken } from '@/utils/token'
 import { login, getUserInfo, getUserRoute } from '@/api/user'
+
 const state = {
   name: '',
-  roles: [],
+  router: [],
   token: getToken(),
 }
 
@@ -17,8 +18,14 @@ const mutations = {
   SET_NAME: (state, name) => {
     state.name = name
   },
-  SET_ROLES: (state, roles) => {
-    state.roles = roles
+  SET_ROUTER: (state, route) => {
+    if (route == null) {
+      return
+    } else if (Array.isArray(route)) {
+      state.router.push(...route)
+    } else {
+      state.router.push(route)
+    }
   },
   SET_TOKEN: (state, token) => {
     state.token = token
@@ -48,12 +55,13 @@ const actions = {
         .then(() => {
           getUserRoute({ userId: 1 })
             .then((resp) => {
-              const backGroundRouteList = resp.result
-
-              // 获取对应组件
-              console.log(backGroundRouteList)
-              commit('SET_NAME', '张三')
-              resolve()
+              try {
+                const backGroundRouteList = resp.result
+                commit('SET_NAME', '张三')
+                resolve({ backGroundRouteList })
+              } catch (error) {
+                console.log(error)
+              }
             })
             .catch(() => {
               reject()
@@ -63,9 +71,10 @@ const actions = {
           reject()
         })
     })
-
-    // commit('SET_ROLES', '富豪')
-    // commit('SET_TOKEN', '张三的Token')
+  },
+  addUserRoute: ({ commit }, route) => {
+    console.log(123123, route)
+    commit('SET_ROUTER', route)
   },
 }
 

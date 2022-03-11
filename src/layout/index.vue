@@ -67,6 +67,7 @@ export default {
         }
         return !item.meta?.hidden
       })
+      console.log(32132132123123, _routes)
       return _routes
     },
     ...mapState({

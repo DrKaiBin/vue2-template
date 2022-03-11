@@ -2,12 +2,13 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-10 19:32:48
+ * @LastEditTime: 2022-03-11 18:35:44
  * @LastEditors: 张楷滨
  */
 import Vue from 'vue'
 import Router from 'vue-router'
 import treeDataBuilder from '@/utils/treeDataBuilder'
+// import { cloneDeep } from 'loadsh'
 // 模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 Vue.use(Router)
 
@@ -55,60 +56,81 @@ const syncRoutes = [
 
 const rolesByWeb = process.env.VUE_APP_ROLES_BY_WEB
 
-export function getModulesRoutes(routeList = []) {
+/**
+ * @Description: 获取路由， 此方法仅适用于前端路由。
+ * @Author: 张楷滨
+ * @Date: 2022-03-11 11:49:53
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
+ */
+export function getWebModulesRoutes() {
   const routeFiles = require.context('./modules', true, /\.js$/)
   // 动态获取modules中的路由
   const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
     const value = routeFiles(routePath)
-    // 前端路由生成
-    if (rolesByWeb === 'true') {
-      if (value.default != null) {
-        const module = value.default
-        const keys = Object.keys(module)
-        keys.forEach((key) => {
-          const element = module[key]
-          // 路径设置
-          if (element.parentId === 'layout') element['path'] = '/' + element.id
-          else element['path'] = element.id
-          // 组件名设置
-          element['name'] = element.id
-          // meta属性设置
-          element['meta'] = {
-            title: element.title ? element.title : '未设置标题',
-            hidden: element.hidden ? element.hidden : false,
-          }
-          routes.push(element)
-        })
-      }
-      // 后端路由生成
-    } else {
-      if (value.default != null) {
-        const module = value.default
-        routeList.forEach((item) => {
-          const key = item.id
-          if (module[item.id] != null) {
-            const element = module[key]
-            // 路径设置
-            if (element.parentId === 'layout')
-              element['path'] = '/' + element.id
-            else element['path'] = element.id
-            // 组件名设置
-            element['name'] = element.id
-            // meta属性设置
-            element['meta'] = {
-              title: element.title ? item.title : '未设置标题',
-              hidden: element.hidden ? item.hidden : false,
-            }
-            routes.push(element)
-          } else {
-            console.error(`未找到组件：${item.id}`)
-          }
-        })
-      }
+    if (value.default != null) {
+      const module = value.default
+      const keys = Object.keys(module)
+      keys.forEach((key) => {
+        const element = module[key]
+        // 路径设置
+        if (element.parentId === 'layout') element['path'] = '/' + element.id
+        else element['path'] = element.id
+        // 组件名设置
+        element['name'] = key
+        // meta属性设置
+        element['meta'] = {
+          title: element.title ? element.title : '未设置标题',
+          hidden: element.hidden ? element.hidden : false,
+        }
+        routes.push(element)
+      })
     }
     return routes
   }, [])
   return moduleRoutes
+}
+export function getbackEndModulesRoutes(backGroundRouteList = []) {
+  const routeFiles = require.context('./modules', true, /\.js$/)
+
+  // 动态获取modules中的路由,将所有路由存放于moduleRoutes
+  const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
+    const value = routeFiles(routePath)
+    if (value.default != null) {
+      const module = value.default
+      const keys = Object.keys(module)
+      keys.forEach((key) => {
+        routes[key] = module[key]
+      })
+    }
+    return routes
+  }, {})
+  const generateRoute = []
+  // 通过后台权限，映射对应路由组件
+  backGroundRouteList.forEach((item) => {
+    const key = item.name
+    if (moduleRoutes[key] != null) {
+      const element = moduleRoutes[key]
+      let newELement = Object.assign({}, element, item)
+      // 路径设置
+      if (item.parentId === 0) newELement['path'] = '/' + item.name
+      else newELement['path'] = item.name
+      // meta属性设置
+      newELement['meta'] = {
+        title: element.title ? item.title : '未设置标题',
+        hidden: element.hidden ? element.hidden : false,
+      }
+      // 组件生成
+      // newELement['component'] =
+      //   item.parentId === 0 ? moduleRoutes['layout'] : element.component
+      generateRoute.push(newELement)
+    } else {
+      console.error(
+        `未找到组件${item.name}, 请检查前端是否路由模块中是否包含该组件`
+      )
+    }
+  })
+  return generateRoute
 }
 
 // 获取异步路由
@@ -116,18 +138,19 @@ let asyncRoutes = []
 
 if (rolesByWeb === 'true') {
   const tree = treeDataBuilder({
-    dataList: getModulesRoutes(),
+    dataList: getWebModulesRoutes(),
     rootNode: { id: 'layout', name: '根节点' },
   })
   asyncRoutes = tree['treeData'][0]['children']
 }
 
 // 创建路由
-const createRouter = () =>
+const createRouter = () => {
   new Router({
     scrollbarBehavior: () => ({ y: 0 }),
     routes: [...syncRoutes, ...asyncRoutes],
   })
+}
 
 const router = createRouter()
 
