@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-11 17:41:09
+ * @LastEditTime: 2022-03-13 18:17:16
  * @LastEditors: 张楷滨
  */
 const testRoutes = {
@@ -10,8 +10,8 @@ const testRoutes = {
     id: 'testIndex',
     parentId: 'layout',
     title: '测试模块',
-    component: () => import('@/layout/index'),
-    // component: require('@/layout/index'),
+    // component: () => import('@/layout/index'),
+    component: require('@/layout/index').default,
   },
   testSafe: {
     id: 'testSafe',

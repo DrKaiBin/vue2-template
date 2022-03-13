@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:07
- * @LastEditTime: 2022-03-11 18:36:04
+ * @LastEditTime: 2022-03-13 18:17:59
  * @LastEditors: 张楷滨
  */
 // const routes = [...syncRoutes, ...asyncRoutes]
@@ -38,11 +38,8 @@ router.beforeEach(async (to, from, next) => {
               rootNode: { id: 0, name: '根节点' },
             })
             const generateRoute = tree['treeData'][0]['children']
-            router.addRoute(...generateRoute)
+            router.addRoutes(generateRoute)
             store.dispatch('user/addUserRoute', generateRoute)
-            // console.log(123123, router, router.getRoutes())
-            console.log(123123, generateRoute, router, router.getRoutes())
-            console.log(666787878)
           }
           next({ ...to, replace: true })
         } catch (error) {

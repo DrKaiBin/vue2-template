@@ -1,8 +1,16 @@
+/*
+ * @Description: 全局状态管理
+ * @Author: 张楷滨
+ * @Date: 2022-02-28 21:21:04
+ * @LastEditTime: 2022-03-13 17:01:52
+ * @LastEditors: 张楷滨
+ */
 import Vue from 'vue'
 import Vuex from 'vuex'
 // 模块化机制编程，导入Vue和Vue，要调用 Vue.use(Vuex)
 Vue.use(Vuex)
 
+import getters from './getter'
 /**
  * 直接读取modules下的状态模块
  * 无需再次引入
@@ -28,6 +36,7 @@ const modules = moduleFiles.keys().reduce((modules, modulePath) => {
 // 创建状态管理模式
 const store = new Vuex.Store({
   modules,
+  getters,
   actions: {
     test() {},
   },
