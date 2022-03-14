@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:32
- * @LastEditTime: 2022-03-11 18:33:11
+ * @LastEditTime: 2022-03-14 10:35:51
  * @LastEditors: 张楷滨
  */
 import { getToken, setToken } from '@/utils/token'
@@ -73,7 +73,6 @@ const actions = {
     })
   },
   addUserRoute: ({ commit }, route) => {
-    console.log(123123, route)
     commit('SET_ROUTER', route)
   },
 }

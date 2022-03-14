@@ -1,173 +1,178 @@
 /*
  * @Description:
+ * 路由封装
+ * env下：
+ * VUE_APP_ROLES_BY_WEB
+ * 为'true'时，直接渲染modules的路由
+ * 为'false'时，获取后台路由，并通过addroutes渲染路由（可参考mock/modules/route文件返回的格式）
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-13 18:20:37
+ * @LastEditTime: 2022-03-14 11:16:48
  * @LastEditors: 张楷滨
  */
-import Vue from "vue";
-import Router from "vue-router";
-import treeDataBuilder from "@/utils/treeDataBuilder";
-import store from "@/store/index";
-import { cloneDeep } from "loadsh";
+import Vue from 'vue'
+import Router from 'vue-router'
+import treeDataBuilder from '@/utils/treeDataBuilder'
+import store from '@/store/index'
+import { cloneDeep } from 'loadsh'
 // 模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
-Vue.use(Router);
+Vue.use(Router)
 
 // 路由列表
 export const syncRoutes = [
   {
-    path: "/",
-    name: "Dashboard",
-    component: () => import("@/layout/index"),
-    redirect: "/dashboard",
+    path: '/',
+    name: 'Dashboard',
+    component: () => import('@/layout/index'),
+    redirect: '/dashboard',
     meta: {
-      title: "主页",
+      title: '主页',
     },
     children: [
       {
-        path: "dashboard",
-        name: "Dashboard",
-        component: () => import("@/views/dashboard/index"),
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
         meta: {
-          title: "主页",
+          title: '主页',
         },
       },
     ],
   },
   {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/login/index"),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index'),
     meta: {
-      title: "登录",
+      title: '登录',
       hidden: true,
     },
   },
-];
+]
 
 // 获取异步路由
-export let asyncRoutes = [];
+export let asyncRoutes = []
+
+const rolesByWeb = process.env.VUE_APP_ROLES_BY_WEB
 
 /**
- * 直接读取routes下的模块路由
- * 无需再次引入
- * 要求：
- * 1. 保证模块路由文件为.js
- * 2. 文件下必须export default 路由模块
- * 3. 路由写法必须正确
- * const xxRoutes = {}
- * export default xxRoutes
- */
-
-const rolesByWeb = process.env.VUE_APP_ROLES_BY_WEB;
-
-/**
- * @Description: 获取路由， 此方法仅适用于前端路由。
+ * @Description: 获取路由， 此方法仅适用于前端路由。VUE_APP_ROLES_BY_WEB=true
  * @Author: 张楷滨
  * @Date: 2022-03-11 11:49:53
  * @LastEditTime: Do not edit
  * @LastEditors: 张楷滨
  */
 export function getWebModulesRoutes() {
-  const routeFiles = require.context("./modules", true, /\.js$/);
+  const routeFiles = require.context('./modules', true, /\.js$/)
   // 动态获取modules中的路由
   const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
-    const value = routeFiles(routePath);
+    const value = routeFiles(routePath)
     if (value.default != null) {
-      const module = value.default;
-      const keys = Object.keys(module);
+      const module = value.default
+      const keys = Object.keys(module)
       keys.forEach((key) => {
-        const element = module[key];
+        const element = module[key]
         // 路径设置
-        if (element.parentId === "layout") element["path"] = "/" + element.id;
-        else element["path"] = element.id;
+        if (element.parentId === 'layout') element['path'] = '/' + element.id
+        else element['path'] = element.id
         // 组件名设置
-        element["name"] = key;
+        element['name'] = key
         // meta属性设置
-        element["meta"] = {
-          title: element.title ? element.title : "未设置标题",
+        element['meta'] = {
+          title: element.title ? element.title : '未设置标题',
           hidden: element.hidden ? element.hidden : false,
-        };
-        routes.push(element);
-      });
+        }
+        routes.push(element)
+      })
     }
-    return routes;
-  }, []);
-  return moduleRoutes;
+    return routes
+  }, [])
+  return moduleRoutes
 }
+
 /**
  * @Description: 获取后台路由
  * @Author: 张楷滨
  * @Date: 2022-03-13 16:50:22
  * @LastEditTime: Do not edit
  * @LastEditors: 张楷滨
- * @param {*} backGroundRouteList
+ * @param {*} backGroundRouteList 后端路由,必须为数组
+ * @example:
+    [
+      {
+        id: 1, // 路由id
+        parentId: 0, // 父节点，默认0为layout
+        name: 'testIndex', // 路由名称，映射route/modules中的路由，获取组件
+        title: '测试模块', // 渲染到菜单栏上的标题
+      }
+    ]
  */
 export function getbackEndModulesRoutes(backGroundRouteList = []) {
-  const routeFiles = require.context("./modules", true, /\.js$/);
+  if (!Array.isArray(backGroundRouteList)) return []
+  const routeFiles = require.context('./modules', true, /\.js$/)
 
   // 动态获取modules中的路由,将所有路由存放于moduleRoutes
   const moduleRoutes = routeFiles.keys().reduce((routes, routePath) => {
-    const value = routeFiles(routePath);
+    const value = routeFiles(routePath)
     if (value.default != null) {
-      const module = value.default;
-      const keys = Object.keys(module);
+      const module = value.default
+      const keys = Object.keys(module)
       keys.forEach((key) => {
-        routes[key] = cloneDeep(module[key]);
-      });
+        routes[key] = cloneDeep(module[key])
+      })
     }
-    return routes;
-  }, {});
-  const generateRoute = [];
+    return routes
+  }, {})
+  const generateRoute = []
   // 通过后台权限，映射对应路由组件
   backGroundRouteList.forEach((item) => {
-    const key = item.name;
+    const key = item.name
     if (moduleRoutes[key] != null) {
-      const element = moduleRoutes[key];
+      const element = moduleRoutes[key]
 
-      let newELement = Object.assign(cloneDeep(element), item);
+      let newELement = Object.assign(cloneDeep(element), item)
       // 路径设置
-      if (item.parentId === 0) newELement["path"] = "/" + item.name;
-      else newELement["path"] = item.name;
+      if (item.parentId === 0) newELement['path'] = '/' + item.name
+      else newELement['path'] = item.name
       // meta属性设置
-      newELement["meta"] = {
-        title: element.title ? item.title : "未设置标题",
-        hidden: element.hidden ? element.hidden : false,
-      };
-      generateRoute.push(newELement);
+      newELement['meta'] = {
+        title: element.title ? item.title : '未设置标题',
+        hidden: newELement.hidden ? newELement.hidden : false,
+      }
+      generateRoute.push(newELement)
     } else {
       console.error(
         `未找到组件${item.name}, 请检查前端是否路由模块中是否包含该组件`
-      );
+      )
     }
-  });
-  console.log("后台", generateRoute);
-  return generateRoute;
+  })
+  return generateRoute
 }
 
-if (rolesByWeb === "true") {
+// 当为前端路由时，直接生成
+if (rolesByWeb === 'true') {
   const tree = treeDataBuilder({
     dataList: getWebModulesRoutes(),
-    rootNode: { id: "layout", name: "根节点" },
-  });
-  asyncRoutes = tree["treeData"][0]["children"];
+    rootNode: { id: 'layout', name: '根节点' },
+  })
+  asyncRoutes = tree['treeData'][0]['children']
 }
 
 // 创建路由
 const createRouter = () => {
-  store.dispatch("user/addUserRoute", [...syncRoutes, ...asyncRoutes]);
+  store.dispatch('user/addUserRoute', [...syncRoutes, ...asyncRoutes])
   return new Router({
     scrollbarBehavior: () => ({ y: 0 }),
     routes: [...syncRoutes, ...asyncRoutes],
-  });
-};
+  })
+}
 
-const router = createRouter();
+const router = createRouter()
 
 // 路由重置，常用于权限切换，改变路由
 export function resetRouter() {
-  const newMatchRouter = createRouter();
-  router.matcher = newMatchRouter.matcher;
+  const newMatchRouter = createRouter()
+  router.matcher = newMatchRouter.matcher
 }
 
-export default router;
+export default router

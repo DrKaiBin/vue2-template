@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:07
- * @LastEditTime: 2022-03-13 18:17:59
+ * @LastEditTime: 2022-03-14 10:36:32
  * @LastEditors: 张楷滨
  */
 // const routes = [...syncRoutes, ...asyncRoutes]
@@ -24,14 +24,12 @@ router.beforeEach(async (to, from, next) => {
       next('/')
     } else {
       const hasRoles = store.state.user.name
-      console.log(hasRoles)
       if (hasRoles && hasRoles !== '') {
         next()
       } else {
         try {
           // 是否已获取信息
           const userResp = await store.dispatch('user/getUserInfo')
-          console.log(userResp)
           if (process.env.VUE_APP_ROLES_BY_WEB !== 'true') {
             const tree = treeDataBuilder({
               dataList: getbackEndModulesRoutes(userResp.backGroundRouteList),
