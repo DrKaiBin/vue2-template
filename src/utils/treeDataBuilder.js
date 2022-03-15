@@ -1,3 +1,22 @@
+/*
+ * @Description: 树形结构构建工具类
+ * @Author: 张楷滨
+ * @Date: 2022-03-01 10:51:34
+ * @LastEditTime: 2022-03-15 10:49:23
+ * @LastEditors: 张楷滨
+ */
+
+/**
+ * @Description: 树形结构构建工具类
+ * @Author: 张楷滨
+ * @Date: 2022-03-15 10:47:25
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
+ * @param {*} dataList 数组， 需要转换为树形结构的数据
+ * @param {*} rootNode 根节点，默认为{ id: 0, label: '根节点', children: [] }
+ * @param {*} treeConfig 属性key， 默认为{ key: 'id', parentKey: 'parentId', childrenKey: 'children' }
+ * @param {*} nodeFilterArr 节点过滤，不对过滤节点进行树形构建
+ */
 function treeDataBuilder({ dataList, rootNode, treeConfig, nodeFilterArr }) {
   const nodeMap = new Map() // 存储各节点数据，id为key，node为value
   const treeData = [rootNode] // 存储树形数据

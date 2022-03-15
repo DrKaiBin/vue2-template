@@ -4,17 +4,27 @@
  * 当导航栏为顶侧双边时，且存在两个以上的子路由，则出现侧边栏，否则隐藏
  * @Author: 张楷滨
  * @Date: 2022-03-07 11:26:35
- * @LastEditTime: 2022-03-08 11:37:41
+ * @LastEditTime: 2022-03-15 17:38:17
  * @LastEditors: 张楷滨
 -->
 <template>
-  <tier-menu
-    :routes="sideRoutes"
-    :navBarType="1"
-    :default-active="defaultOpeneds"
-    mode="vertical"
-    router
-  ></tier-menu>
+  <div class="side-menu">
+    <tier-menu
+      :routes="sideRoutes"
+      :navBarType="1"
+      :default-active="defaultOpeneds"
+      :collapse="collapse"
+      mode="vertical"
+      router
+    ></tier-menu>
+    <div class="collapse-box">
+      <svg-icon
+        class="collapse-icon"
+        icon="navCollapse"
+        @click="changeCollapse"
+      ></svg-icon>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -32,6 +42,15 @@ export default {
     },
     defaultOpeneds: {
       type: [String],
+    },
+    collapse: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    changeCollapse() {
+      this.$store.commit('config/SET_SIDEBAR_COLLAPSE', !this.collapse)
     },
   },
 }

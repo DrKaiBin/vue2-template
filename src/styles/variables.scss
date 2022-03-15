@@ -1,8 +1,23 @@
 // 颜色变量
 $color-primary: #5177ff;
 $color-primary-50: rgba($color-primary, .5);
-// $color-primary-50: mix(#ffffff, $color-primary, 50%);
 $color-primary-10: rgba($color-primary, .1);
+
+$color-success: #18c38b;
+$color-success-50: rgba($color-success, .5);
+$color-success-10: rgba($color-success, .1);
+
+$color-warning: #efc415;
+$color-warning-50: rgba($color-warning, .5);
+$color-warning-10: rgba($color-warning, .1);
+
+$color-danger: #fe485a;
+$color-danger-50: rgba($color-danger, .5);
+$color-danger-10: rgba($color-danger, .1);
+
+$color-info: #8b909f;
+$color-info-50: rgba($color-info, .5);
+$color-info-10: rgba($color-info, .1);
 
 //  文字颜色
 $text-headline: #303133; // 大标题
@@ -15,6 +30,9 @@ $text-background: #ffffff; // 填充色相背景时使用
 // 间距变量
 $padding-base: 4px;
 
+
+/** 图标尺寸 **/
+$icon-size: 20px;
 
 
 

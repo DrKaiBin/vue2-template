@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-14 11:28:25
+ * @LastEditTime: 2022-03-15 16:38:07
  * @LastEditors: 张楷滨
  */
 const testRoutes = {
@@ -10,12 +10,14 @@ const testRoutes = {
     id: 'testIndex',
     parentId: 'layout',
     title: '测试模块',
+    icon: 'analytics',
     component: () => import('@/layout/index'),
   },
   testSafe: {
     id: 'testSafe',
     parentId: 'testIndex',
     title: '测试安全',
+    icon: 'analytics',
     component: () => import('@/views/dashboard/index'),
     // component: require('@/views/dashboard/index'),
   },
@@ -23,18 +25,21 @@ const testRoutes = {
     id: 'testComponent1',
     parentId: 'testIndex',
     title: '测试组件1',
+    icon: 'timeMoney',
     component: () => import('@/views/dashboard/index'),
   },
   testComponent2: {
     id: 'testComponent2',
     parentId: 'testIndex',
     title: '测试组件2',
+    icon: 'increase',
     component: () => import('@/views/dashboard/index'),
   },
   testComponent3: {
     id: 'testComponent3',
     parentId: 'testIndex',
     title: '测试组件3',
+    icon: 'wallet',
     component: () => import('@/views/dashboard/index'),
   },
 }

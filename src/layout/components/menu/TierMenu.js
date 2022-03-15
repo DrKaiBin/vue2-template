@@ -2,7 +2,7 @@
  * @Description: 快速生成导航栏（树形结构）
  * @Author: 张楷滨
  * @Date: 2022-03-02 11:11:28
- * @LastEditTime: 2022-03-14 10:51:47
+ * @LastEditTime: 2022-03-15 17:12:56
  * @LastEditors: 张楷滨
  */
 import { cloneDeep } from 'loadsh'
@@ -53,7 +53,8 @@ function setMenuItem(h, route, menuItemProps) {
   if (route.meta && route.meta.hidden && route.meta.hidden === true) return
   return (
     <ElMenuItem key={index} attrs={menuItemProps} index={index}>
-      {route.meta.title}
+      {route.meta.icon ? <svg-icon icon={route.meta.icon}></svg-icon> : ''}
+      <span slot="title">{route.meta.title}</span>
     </ElMenuItem>
   )
 }
@@ -78,7 +79,10 @@ function setMenu(h, route, subMenuProps, menuItemProps) {
   } else {
     return (
       <ElSubmenu index={route.name} attrs={subMenuProps}>
-        <template slot="title">{route.meta.title}</template>
+        <template slot="title">
+          {route.meta.icon ? <svg-icon icon={route.meta.icon}></svg-icon> : ''}
+          <span slot="title">{route.meta.title}</span>
+        </template>
         {route.children.map((child) => {
           child.path = route.path + '/' + child.path
           return setMenu(h, child)
