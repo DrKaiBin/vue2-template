@@ -31,8 +31,10 @@
     "mockjs": "^1.1.0",
     "sass": "^1.49.8",
     "sass-loader": "10.2.1",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "svg-sprite-loader": "^6.0.11",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpackbar": "^5.0.2"
   },
   "eslintConfig": {
     "root": true,

@@ -27,3 +27,4 @@ doc/docs/.vuepress/.temp
 doc/docs/.vuepress/.cache
 yarn.lock
 .env
+output.js
