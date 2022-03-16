@@ -2,13 +2,13 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-14 14:41:08
+ * @LastEditTime: 2022-03-16 18:02:53
  * @LastEditors: 张楷滨
 -->
 
 # 快速上手框架文档
 
-## 添加 Vue-Router 路由模块
+## <div id="addRouter">添加 Vue-Router 路由模块</div>
 
 ### 前端路由
 

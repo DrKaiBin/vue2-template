@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 16:46:14
+ * @LastEditTime: 2022-03-16 17:38:06
  * @LastEditors: 张楷滨
  */
 import Vue from 'vue'
@@ -24,8 +24,12 @@ import { i18n } from '@/utils/lang'
 
 Vue.config.productionTip = false
 
-import '../mock/index'
-
+if (
+  process.env.NODE_ENV === 'development' &&
+  process.env.VUE_APP_USE_MOCK === 'true'
+) {
+  import('../mock/index')
+}
 new Vue({
   router,
   store,

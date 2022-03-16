@@ -2,7 +2,7 @@
  * @Description: vuecli配置
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 14:32:00
+ * @LastEditTime: 2022-03-16 17:43:06
  * @LastEditors: 张楷滨
  */
 const path = require('path')
@@ -23,6 +23,10 @@ const isBundleAnalyzer =
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
+const isMock =
+  process.env.NODE_ENV === 'development' &&
+  process.env.VUE_APP_USE_MOCK === 'true'
+
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -30,7 +34,7 @@ function resolve(dir) {
 module.exports = {
   devServer: {
     open: true,
-    before: require('./mock/mock-server.js'),
+    before: isMock ? require('./mock/mock-server.js') : '',
   },
   // publicPath: process.env.VUE_APP_ROOT_PATH,
   // outputDir: process.env.VUE_APP_ROOT_PATH,
