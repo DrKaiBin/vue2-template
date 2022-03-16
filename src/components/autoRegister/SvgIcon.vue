@@ -3,7 +3,7 @@
  * @example: <svg-icon icon-class="bianji"></svg-icon>
  * @Author: 张楷滨
  * @Date: 2022-03-15 11:10:55
- * @LastEditTime: 2022-03-15 16:36:42
+ * @LastEditTime: 2022-03-16 17:24:41
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -34,12 +34,6 @@ export default {
         return 'svg-icon ' + this.className
       } else {
         return 'svg-icon'
-      }
-    },
-    styleExternalIcon() {
-      return {
-        mask: `url(${this.icon}) no-repeat 50% 50%`,
-        '-webkit-mask': `url(${this.icon}) no-repeat 50% 50%`,
       }
     },
   },

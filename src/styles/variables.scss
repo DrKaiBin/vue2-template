@@ -39,9 +39,16 @@ $icon-size: 20px;
 /** 布局框架 **/
 
 $--layout-head--height: 56px;
+// layout背景变量
+$--layout-background: #f9f9fb;
 
 // 顶部导航栏变量
-$--header-background: #001018;
+$--header-background: #000000;
 $--top-menu-item-background--hover: $color-primary-50;
 $--top-menu-item-text: #e0e1e5;
 $--top-menu-item-text--hover: $color-primary;
+
+// 侧边栏变量
+$--sidebar-menu-background: #101731;
+$--sidebar-sub-menu-background: #0b1022;
+$--sidebar-menu-item-text: #e0e1e5;

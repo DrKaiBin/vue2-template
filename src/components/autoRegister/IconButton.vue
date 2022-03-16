@@ -2,18 +2,20 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-15 14:42:09
- * @LastEditTime: 2022-03-15 16:04:49
+ * @LastEditTime: 2022-03-16 17:25:00
  * @LastEditors: 张楷滨
 -->
 <template>
-  <el-button
-    v-bind="$attrs"
-    v-on="$listeners"
-    :class="['icon-button', 'icon-button-' + icon]"
-    :style="iconStyle"
-  >
-    <svg-icon :icon="icon" :icon-style="iconStyle" :type="type"></svg-icon>
-  </el-button>
+  <el-tooltip placement="top" :content="iconTip">
+    <el-button
+      v-bind="$attrs"
+      v-on="$listeners"
+      :class="['icon-button', 'icon-button-' + icon]"
+      :style="iconStyle"
+    >
+      <svg-icon :icon="icon" :icon-style="iconStyle" :type="type"></svg-icon>
+    </el-button>
+  </el-tooltip>
 </template>
 
 <script>
@@ -29,6 +31,11 @@ export default {
     type: {
       type: String,
       default: 'primary',
+    },
+  },
+  computed: {
+    iconTip() {
+      return this.$t('icons.' + this.icon)
     },
   },
 }

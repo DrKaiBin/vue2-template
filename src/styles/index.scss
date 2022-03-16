@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-15 18:47:16
+ * @LastEditTime: 2022-03-16 16:09:48
  * @LastEditors: 张楷滨
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \vue2-template\src\styles\index.scss
@@ -31,6 +31,7 @@ div {
   **/
 .app-main {
   @include wh100();
+  background-color: $--layout-background;
 
   // 头部
   .header {
@@ -157,9 +158,12 @@ div {
     .side-menu {
       height: 100%;
       box-sizing: border-box;
+      background-color: $--sidebar-menu-background;
       float: left;
+      padding-top: $padding-base * 4;
+      color: $--sidebar-menu-item-text;
 
-      // reset element-ui css
+      // 删除el-menu样式
       .horizontal-collapse-transition {
         transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
       }
@@ -168,15 +172,78 @@ div {
         width: 100%;
         height: calc(100% - 48px);
         float: left;
+        background-color: inherit;
 
         .el-menu-item,
         .el-submenu__title {
-          line-height: 56px;
+          color: $--sidebar-menu-item-text;
+          height: 48px;
+          line-height: 48px;
+          padding: 0 $padding-base * 8 !important;
 
           .svg-icon {
             vertical-align: middle;
-            // margin-top: $padding-base;
             margin-right: $padding-base;
+          }
+
+        }
+
+        .el-menu-item {
+          color: $--sidebar-menu-item-text;
+          height: 48px;
+          line-height: 48px;
+          padding: 0 $padding-base * 8 !important;
+          transition: color ease-in .45s;
+
+          .title,
+          .svg-icon {
+            z-index: 222;
+            position: relative;
+          }
+
+          &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: $padding-base * 2;
+            width: calc(100% - $padding-base * 4);
+            height: 100%;
+            z-index: 0;
+            border-radius: 4px;
+            transition: background-color ease-in .45s;
+          }
+
+          &:hover,
+          &:active,
+          &:focus,
+          &.is-active {
+            background-color: transparent;
+            color: $text-background;
+
+            &::before {
+
+              background-color: $color-primary;
+            }
+          }
+
+        }
+
+        .el-submenu {
+          background-color: $--sidebar-sub-menu-background;
+
+          &__title {
+
+            &:hover,
+            &:active,
+            &:focus,
+            &.is-active {
+              background-color: transparent;
+            }
+          }
+
+          .el-menu-item {
+            padding: 0 ($padding-base * 9 + 20px) !important;
           }
         }
       }
@@ -202,9 +269,7 @@ div {
     .render-view {
       height: 100%;
       float: left;
-      background-color: rgba(155, 33, 111, 0.1);
       padding: 20px;
-
     }
 
     $side-menu-open-collapse--width: 64px;
@@ -219,6 +284,14 @@ div {
 
         .collapse-box .collapse-icon {
           transform: rotate(-180deg);
+        }
+
+        .el-menu {
+          .el-submenu {
+            &__title {
+              padding: 0 20px !important;
+            }
+          }
         }
       }
 

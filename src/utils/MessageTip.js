@@ -17,7 +17,7 @@
  * this.$message.error("66666");
  **/
 import { Message } from 'element-ui'
-import { cloneDeep } from 'loadsh/cloneDeep'
+import { cloneDeep } from 'loadsh'
 
 function MessageTip() {}
 

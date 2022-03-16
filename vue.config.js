@@ -2,7 +2,7 @@
  * @Description: vuecli配置
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 11:55:03
+ * @LastEditTime: 2022-03-16 14:32:00
  * @LastEditors: 张楷滨
  */
 const path = require('path')
@@ -99,6 +99,11 @@ module.exports = {
           name: 'chunk-elementUI', // split elementUI into a single package
           priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
           test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
+        },
+        loadsh: {
+          name: 'chunk-lodsh',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]_?loadsh(.*)/,
         },
       },
     })

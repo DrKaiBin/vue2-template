@@ -1,5 +1,12 @@
 /*
  * @Description:
+ * @Author: 张楷滨
+ * @Date: 2022-03-14 10:31:58
+ * @LastEditTime: 2022-03-16 14:42:51
+ * @LastEditors: 张楷滨
+ */
+/*
+ * @Description:
  * 路由封装
  * env下：
  * VUE_APP_ROLES_BY_WEB
@@ -14,7 +21,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import treeDataBuilder from '@/utils/treeDataBuilder'
 import store from '@/store/index'
-import { cloneDeep } from 'loadsh/cloneDeep'
+import { cloneDeep } from 'loadsh'
 // 模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 Vue.use(Router)
 
