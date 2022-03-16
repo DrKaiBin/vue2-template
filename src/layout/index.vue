@@ -43,7 +43,7 @@ import TopMenu from './components/menu/TopMenu.vue'
 import SideMenu from './components/menu/SideMenu.vue'
 import BaseInfo from './components/config/BaseInfo.vue'
 import ConfigDrawer from './components/config/ConfigDrawer.vue'
-import { cloneDeep } from 'loadsh'
+import { cloneDeep } from 'loadsh/cloneDeep'
 export default {
   name: 'Layout',
   components: {

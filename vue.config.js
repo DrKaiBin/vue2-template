@@ -2,7 +2,7 @@
  * @Description: vuecli配置
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-15 19:07:25
+ * @LastEditTime: 2022-03-16 11:55:03
  * @LastEditors: 张楷滨
  */
 const path = require('path')
@@ -15,6 +15,13 @@ const isSpeedMeasure =
   process.env.VUE_APP_SPEED_MEASURE_WEBPACK === 'true'
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const smp = new SpeedMeasurePlugin()
+
+// 是否开启打包模块大小分析
+const isBundleAnalyzer =
+  process.env.NODE_ENV === 'production' &&
+  process.env.VUE_APP_BUNDLE_ANALYZER_PLUGIN === 'true'
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -34,12 +41,17 @@ module.exports = {
       },
     },
   },
+  // 生产环境取消map
+  productionSourceMap: false,
   // webpack 配置简单方式
   configureWebpack: () => {
     // 插件配置
     const plugins = []
     if (process.env.NODE_ENV === 'production') {
       plugins.push(new WebpackBar())
+    }
+    if (isBundleAnalyzer) {
+      plugins.push(new BundleAnalyzerPlugin())
     }
     // 提炼为变量
     const _configureWebpack = {
@@ -73,5 +85,22 @@ module.exports = {
         symbolId: 'icon-[name]',
       })
       .end()
+    // 切割代码，提取公共代码
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial', // only package third parties that are initially dependent
+        },
+        elementUI: {
+          name: 'chunk-elementUI', // split elementUI into a single package
+          priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+          test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
+        },
+      },
+    })
   },
 }

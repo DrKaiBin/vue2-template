@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-03-15 17:12:56
  * @LastEditors: 张楷滨
  */
-import { cloneDeep } from 'loadsh'
+import { cloneDeep } from 'loadsh/cloneDeep'
 
 /**
  * @Description:

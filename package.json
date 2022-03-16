@@ -34,6 +34,7 @@
     "speed-measure-webpack-plugin": "^1.5.0",
     "svg-sprite-loader": "^6.0.11",
     "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpackbar": "^5.0.2"
   },
   "eslintConfig": {

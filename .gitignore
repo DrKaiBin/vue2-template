@@ -28,3 +28,4 @@ doc/docs/.vuepress/.cache
 yarn.lock
 .env
 output.js
+yarn.lock

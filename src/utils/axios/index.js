@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Loading } from 'element-ui'
 import MessageTip from '../MessageTip'
-import { cloneDeep } from 'loadsh'
+import { cloneDeep } from 'loadsh/cloneDeep'
 import {
   addPending,
   removePending,
