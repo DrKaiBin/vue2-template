@@ -2,13 +2,13 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-16 18:02:53
+ * @LastEditTime: 2022-03-17 11:47:40
  * @LastEditors: 张楷滨
 -->
 
 # 快速上手框架文档
 
-## <div id="addRouter">添加 Vue-Router 路由模块</div>
+## Vue-Router 路由模块
 
 ### 前端路由
 
@@ -103,7 +103,7 @@ export default utilRoutes
 
 - 配完以上步骤后，路由模块便自动注册到 router 中！
 
-## 添加 Vuex 全局状态管理模块
+## Vuex 全局状态管理模块
 
 **1. 添加新的模块**
 
@@ -131,7 +131,7 @@ export default {
 
 - 配完以上步骤后，`store 模块`便自动注册到 vuex 中！
 
-## Mock 使用
+## Mock 模拟 API
 
 **1. 添加新的 Mock 模块**
 
@@ -174,7 +174,9 @@ const testApi = [
 export default testApi
 ```
 
-## 全局 API 使用
+## Jest 测试
+
+## Axios 全局 API
 
 **1. 引入全局 API**
 
@@ -229,3 +231,36 @@ export function getValue() {
   )
 }
 ```
+
+## Icon 配置及使用
+
+### 配置
+
+- 首先你需要了解：
+  - 如果你添加的 svg 仅当作为背景，则你仅需要放到当前页面文件下的`images目录`即可。
+  - 相反，作为非背景，你需要进行一下步骤：
+    1. 你需要将其放置：`asset\icons\svg`下
+       - `buttonIcons`文件夹：按钮型图标（建议按钮型放置于此文件夹下）
+       - `sidebarIcons`文件夹：侧边栏图标（该文件夹下仅存放侧边栏图标）
+       - 如你需要你可以添加更多文件夹归类
+    2. 放置后好，手动将其填充色删掉（一般将 svg 中的 color 删掉即可）
+  - 当你将 svg 存放好后，重启项目后，便会自动添加至 svg-sprite 中
+- 当为按钮图标时，你还需要
+  - 在`utils/lang/zh.js`中的`icons`添加描述，此作用为，按钮图标鼠标移上需要真是提示
+
+### 使用
+
+- 如果为侧边栏图标，你只需在路由中添加 icon 属性并值对应为图标名称即可
+- 如果为页面上，你可使用`<svg-icon> `/ `<icon-button>`
+  - 添加`icon={图标名}`
+  - 项目上所有图标均为无颜色，所以你需要添加一个  
+    `type=""可选值：primary/success/wanring/danger/info`  
+    当然如果以上颜色均不符合你的需求，你可以添加`iconStyle/iconClass`添加 color 属性颜色即可
+
+## FormRule 表单校检
+
+## Styles 全局样式
+
+## Theme 主题定制
+
+## Empty 暂无
