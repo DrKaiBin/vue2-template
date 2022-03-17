@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-15 17:37:15
+ * @LastEditTime: 2022-03-17 18:44:27
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -23,6 +23,12 @@ export default {
   computed: {
     routeName() {
       return this.$route.meta.title
+    },
+  },
+  props: {
+    msg: {
+      type: String,
+      default: 'new message',
     },
   },
   mounted() {},
