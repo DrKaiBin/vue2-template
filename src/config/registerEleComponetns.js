@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 17:09:10
+ * @LastEditTime: 2022-03-17 18:55:42
  * @LastEditors: 张楷滨
  */
 // Element按需引入模块
@@ -16,6 +16,7 @@ import {
   Radio,
   RadioGroup,
   Tooltip,
+  Input,
 } from 'element-ui'
 import Vue from 'vue'
 
@@ -31,3 +32,4 @@ Vue.use(Button)
   .use(Radio)
   .use(RadioGroup)
   .use(Tooltip)
+  .use(Input)
