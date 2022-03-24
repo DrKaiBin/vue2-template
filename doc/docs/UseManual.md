@@ -2,7 +2,7 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-17 11:47:40
+ * @LastEditTime: 2022-03-24 14:49:52
  * @LastEditors: 张楷滨
 -->
 
@@ -262,5 +262,19 @@ export function getValue() {
 ## Styles 全局样式
 
 ## Theme 主题定制
+
+- 在主题模块下，已为你准备好调色板，并写上了对应的描述，你只需要调整对应颜色，即可对当前已配置主题效果的页面生效
+- 复制到剪切板
+  - 如果你想将设置好的主题应用于项目，你可直接将其复制到剪切板，并将复制内容替换到`styles/variables.scss`中的`$root-map`变量中即可
+- 保存到当前浏览器
+  - 当你对对应的项，进行调色后，你可直接点击`保存到当前浏览器`，这样在页面刷新后，你就仍可以为你调整后的颜色
+- 重置样式
+
+  - 当你做过保存到当前浏览器后，如果你需要还原回项目以后的颜色，你需要点击`重置样式`，对应项目主题进行重置
+
+:::tip
+暂不支持 IE 浏览器使用(`采用css var()`)，如果需要支持 IE，你需要在`styles/variables.scss`将对应的`var`更换为普通变量  
+暂不支持对 ElementUI 组件库进行主题定制，你需要到 [ele 官网](https://element.eleme.cn/#/zh-CN/theme/preview)，进行主题定制修改，并将下载文件后，替换掉`styles/elementUiStyle`目录下的文件
+:::
 
 ## Empty 暂无
