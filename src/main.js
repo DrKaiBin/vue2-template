@@ -11,6 +11,7 @@ import '@/styles/index.scss'
 import MessageTip from '@/utils/MessageTip'
 import '@/router/permission'
 import '@/config/registerEleComponetns'
+import '@/config/registerPlugins'
 
 Vue.prototype.$message = MessageTip
 

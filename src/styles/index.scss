@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 16:09:48
+ * @LastEditTime: 2022-03-21 19:15:28
  * @LastEditors: 张楷滨
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \vue2-template\src\styles\index.scss
@@ -39,7 +39,7 @@ div {
     height: $--layout-head--height;
     float: left;
     padding: 0 $padding-base * 6;
-    background-color: $--header-background;
+    background-color: $--layout-head--background;
 
     //  项目logo
     .logo-container {
@@ -82,7 +82,7 @@ div {
         box-sizing: border-box;
         background-color: inherit;
         border-bottom: none;
-        color: $--top-menu-item-text;
+        color: $--layout-head-menu-item-text;
 
         &-item {
           color: inherit;
@@ -92,8 +92,8 @@ div {
           &:not(.is-disabled):hover,
           &.is-active {
             font-weight: 550;
-            color: $--top-menu-item-text--hover;
-            background-color: $--top-menu-item-background--hover;
+            color: $--layout-head-menu-item-text--hover;
+            background-color: $--layout-head-menu-item-background--hover;
           }
         }
       }
@@ -158,10 +158,10 @@ div {
     .side-menu {
       height: 100%;
       box-sizing: border-box;
-      background-color: $--sidebar-menu-background;
+      background-color: $--layout-sidebar-menu-background;
       float: left;
       padding-top: $padding-base * 4;
-      color: $--sidebar-menu-item-text;
+      color: $--layout-sidebar-menu-item-text;
 
       // 删除el-menu样式
       .horizontal-collapse-transition {
@@ -176,7 +176,7 @@ div {
 
         .el-menu-item,
         .el-submenu__title {
-          color: $--sidebar-menu-item-text;
+          color: $--layout-sidebar-menu-item-text;
           height: 48px;
           line-height: 48px;
           padding: 0 $padding-base * 8 !important;
@@ -189,7 +189,7 @@ div {
         }
 
         .el-menu-item {
-          color: $--sidebar-menu-item-text;
+          color: $--layout-sidebar-menu-item-text;
           height: 48px;
           line-height: 48px;
           padding: 0 $padding-base * 8 !important;
@@ -230,7 +230,7 @@ div {
         }
 
         .el-submenu {
-          background-color: $--sidebar-sub-menu-background;
+          background-color: $--layout-sidebar-sub-menu-background;
 
           &__title {
 

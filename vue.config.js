@@ -2,7 +2,7 @@
  * @Description: vuecli配置
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 17:43:06
+ * @LastEditTime: 2022-03-23 15:33:26
  * @LastEditors: 张楷滨
  */
 const path = require('path')
@@ -41,7 +41,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/styles/mixins.scss";@import "~@/styles/variables.scss";`,
+        prependData: `@import "~@/styles/mixins.scss";@import "~@/styles/variables.scss";`,
       },
     },
   },

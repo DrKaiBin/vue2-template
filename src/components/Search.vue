@@ -2,7 +2,7 @@
  * @Description: 搜索组件
  * @Author: 张楷滨
  * @Date: 2022-03-17 18:52:52
- * @LastEditTime: 2022-03-17 19:04:44
+ * @LastEditTime: 2022-03-21 11:41:13
  * @LastEditors: 张楷滨
 -->
 
@@ -11,15 +11,17 @@
     v-model="inputValue"
     v-bind="$attrs"
     v-on="$listeners"
-    @change="updateValute"
+    @change="searchEvent"
+    @keydown.enter="searchEvent"
   ></el-input>
 </template>
 
 <script>
 export default {
+  name: 'Search',
   props: {
     value: {
-      type: String,
+      type: [String, Number],
     },
   },
   data() {
@@ -28,8 +30,12 @@ export default {
     }
   },
   methods: {
-    updateValute() {
+    updateValue() {
       this.$emit('update:value', this.inputValue)
+    },
+    searchEvent() {
+      this.updateValue()
+      this.$emit('search')
     },
   },
 }

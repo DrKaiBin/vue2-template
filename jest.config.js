@@ -2,7 +2,7 @@
  * @Description: jest配置
  * @Author: 张楷滨
  * @Date: 2022-03-17 18:36:39
- * @LastEditTime: 2022-03-17 18:37:57
+ * @LastEditTime: 2022-03-18 15:48:20
  * @LastEditors: 张楷滨
  */
 module.exports = {
@@ -14,6 +14,7 @@ module.exports = {
       'jest-transform-stub',
     '^.+\\.jsx?$': 'babel-jest',
   },
+  transformIgnorePatterns: ['node_modules/element-ui'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },

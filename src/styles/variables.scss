@@ -1,30 +1,69 @@
+$root-map: ( // 主题
+  --color-primary: #5177ff,
+  --color-success: #18c38b,
+  --color-warning: #efc415,
+  --color-danger: #fe485a,
+  --color-info: #8b909f,
+  // 文本
+  --text-headline: #303133,
+  --text-regular: #606266,
+  --text-secondary: #909399,
+  --text-tip-disabled: #c0c4cc,
+  --text-background: #ffffff,
+  --padding-base: 4px,
+  --icon-size: 20px,
+  // 框架
+  // 整体背景
+  --layout-background: #f9f9fb,
+  // 顶部导航栏
+  --layout-head--height: 56px,
+  --layout-head--background: #000000,
+  --layout-head-menu-item-text: #e0e1e5,
+  --layout-head-menu-item-background--hover: '$color-primary-50',
+  // 侧边栏
+  --layout-sidebar-menu-background: #101731,
+  --layout-sidebar-sub-menu-background: #0b1022,
+  --layout-sidebar-menu-item-text:#e0e1e5,
+);
+
+
+
+
+:root {
+
+  @each $key,
+  $value in $root-map {
+    #{$key}: $value;
+  }
+}
+
 // 颜色变量
-$color-primary: #5177ff;
+$color-primary: var(--color-primary);
 $color-primary-50: rgba($color-primary, .5);
 $color-primary-10: rgba($color-primary, .1);
 
-$color-success: #18c38b;
+$color-success: var(--color-success);
 $color-success-50: rgba($color-success, .5);
 $color-success-10: rgba($color-success, .1);
 
-$color-warning: #efc415;
+$color-warning: var(--color-warning);
 $color-warning-50: rgba($color-warning, .5);
 $color-warning-10: rgba($color-warning, .1);
 
-$color-danger: #fe485a;
+$color-danger: var(--color-danger);
 $color-danger-50: rgba($color-danger, .5);
 $color-danger-10: rgba($color-danger, .1);
 
-$color-info: #8b909f;
+$color-info: var(--color-info);
 $color-info-50: rgba($color-info, .5);
 $color-info-10: rgba($color-info, .1);
 
 //  文字颜色
-$text-headline: #303133; // 大标题
-$text-regular: #606266; // 正文、图标图列、表格、分页
-$text-secondary: #909399; // 表头、表单、基础图标（下拉、叉）
-$text-tip-disabled: #c0c4cc; // 提示性文字、禁用文字、移上表单框颜色
-$text-background: #ffffff; // 填充色相背景时使用
+$text-headline: var(--text-headline); // 大标题
+$text-regular: var(--text-regular); // 正文、图标图列、表格、分页
+$text-secondary: var(--text-secondary); // 表头、表单、基础图标（下拉、叉）
+$text-tip-disabled: var(--text-tip-disabled); // 提示性文字、禁用文字、移上表单框颜色
+$text-background: var(--text-background); // 填充色相背景时使用
 
 
 // 间距变量
@@ -32,23 +71,30 @@ $padding-base: 4px;
 
 
 /** 图标尺寸 **/
-$icon-size: 20px;
-
-
+$icon-size: var(--icon-size);
 
 /** 布局框架 **/
 
-$--layout-head--height: 56px;
+$--layout-head--height: var(--layout-head--height);
 // layout背景变量
-$--layout-background: #f9f9fb;
+$--layout-background: var(--layout-background);
 
 // 顶部导航栏变量
-$--header-background: #000000;
-$--top-menu-item-background--hover: $color-primary-50;
-$--top-menu-item-text: #e0e1e5;
-$--top-menu-item-text--hover: $color-primary;
+$--layout-head--background: var(--layout-head--background);
+$--layout-head-menu-item-background--hover: $color-primary-50;
+$--layout-head-menu-item-text: var(--layout-head-menu-item-text);
+$--layout-head-menu-item-text--hover: $color-primary;
 
 // 侧边栏变量
-$--sidebar-menu-background: #101731;
-$--sidebar-sub-menu-background: #0b1022;
-$--sidebar-menu-item-text: #e0e1e5;
+$--layout-sidebar-menu-background: var(--layout-sidebar-menu-background);
+$--layout-sidebar-sub-menu-background: var(--layout-sidebar-sub-menu-background);
+$--layout-sidebar-menu-item-text: var(--layout-sidebar-menu-item-text);
+
+
+:export {
+
+  @each $key,
+  $value in $root-map {
+    #{$key}: $value;
+  }
+}

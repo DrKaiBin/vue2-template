@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-14 10:31:58
- * @LastEditTime: 2022-03-16 14:42:51
+ * @LastEditTime: 2022-03-24 14:12:01
  * @LastEditors: 张楷滨
  */
 /*
@@ -42,6 +42,25 @@ export const syncRoutes = [
         component: () => import('@/views/dashboard/index'),
         meta: {
           title: '主页',
+        },
+      },
+    ],
+  },
+  {
+    path: '/theme',
+    name: 'Theme',
+    component: () => import('@/layout/index'),
+    redirect: '/theme/themeConfig',
+    meta: {
+      title: '主题',
+    },
+    children: [
+      {
+        path: 'themeConfig',
+        name: 'ThemeConfig',
+        component: () => import('@/views/themeConfig/index'),
+        meta: {
+          title: '主题配置',
         },
       },
     ],
