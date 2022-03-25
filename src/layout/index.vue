@@ -5,7 +5,7 @@
       <div class="menu" :key="navBarType">
         <top-menu
           :menuRoutes="menuRoutes"
-          :defaultOpeneds="defaultOpeneds"
+          :defaultOpeneds="defaultOpenedsTopMenu"
           :navBarType="navBarType"
           @select="changeTopMenuItem"
         />
@@ -25,7 +25,7 @@
       <side-menu
         v-if="navBarType === 2 && sideRoutes.length >= 1"
         :sideRoutes="sideRoutes"
-        :defaultOpeneds="defaultOpeneds"
+        :defaultOpeneds="$route.path"
         :collapse="sidebarCollapse"
       />
       <div class="render-view">
@@ -63,12 +63,16 @@ export default {
   computed: {
     menuRoutes() {
       const _routes = this.userRoutes.filter((item) => {
-        if (!item.meta?.hidden) {
-          item.redirect = this.setMainRouteRedirect(item)
-        }
+        // if (!item.meta?.hidden) {
+        //   item.redirect = this.setMainRouteRedirect(item)
+        // }
         return !item.meta?.hidden
       })
       return _routes
+    },
+    defaultOpenedsTopMenu() {
+      if (this.$route.redirectedFrom === '/') return '/'
+      else return '/' + this.$route.path.split('/')[1]
     },
     sidebarCollapse() {
       return this.$store.state.config.sidebarCollapse
@@ -76,30 +80,10 @@ export default {
     ...mapGetters(['navBarType', 'userRoutes']),
   },
   created() {
+    console.log(888, this.$route)
     this.changeTopMenuItem(this.$route.path, false)
   },
   methods: {
-    /**
-     * @Description: 设置主路由重定向
-     * @Author: 张楷滨
-     * @Date: 2022-03-13 17:06:57
-     * @LastEditTime: Do not edit
-     * @LastEditors: 张楷滨
-     * @param {*} route
-     */
-    setMainRouteRedirect(route, basePath = '') {
-      let path = route.path === '/' ? '' : route.path
-      if (basePath !== '') path = basePath
-      if (route.children != null) {
-        const fristChild = route.children.find((child) => {
-          return !child.meta?.hidden
-        })
-        if (fristChild != null) path += '/' + fristChild.path
-        if (fristChild.children)
-          path = this.setMainRouteRedirect(fristChild, path)
-      }
-      return path
-    },
     /**
      * @Description: 打开项目配置
      * @Author: 张楷滨
@@ -149,6 +133,7 @@ export default {
       }
       this.$nextTick(() => {
         this.defaultOpeneds = indexPath
+        console.log(2333, this.defaultOpeneds)
       })
     },
   },

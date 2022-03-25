@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-16 17:38:06
+ * @LastEditTime: 2022-03-25 18:01:27
  * @LastEditors: 张楷滨
  */
 import Vue from 'vue'
@@ -20,6 +20,7 @@ import store from '@/store/index'
 
 import './assets/icons' // 注册精灵图svg
 import '@/components/autoRegister/index' //全局组件自动化注册
+import '@/config/derective/index'
 
 import { i18n } from '@/utils/lang'
 

@@ -40,7 +40,7 @@ const testRoutes = {
     parentId: 'testIndex',
     title: '测试组件3',
     icon: 'wallet',
-    component: () => import('@/views/dashboard/index'),
+    component: () => import('@/views/components/Empty.vue'),
   },
 }
 

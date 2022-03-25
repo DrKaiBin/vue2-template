@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:07
- * @LastEditTime: 2022-03-14 10:36:32
+ * @LastEditTime: 2022-03-25 16:40:59
  * @LastEditors: 张楷滨
  */
 // const routes = [...syncRoutes, ...asyncRoutes]
@@ -10,7 +10,7 @@
 // import router from './index'
 import { getToken } from '@/utils/token'
 import store from '@/store/index'
-import router, { getbackEndModulesRoutes } from './index'
+import router, { getbackEndModulesRoutes, setMainRouteRedirect } from './index'
 import treeDataBuilder from '@/utils/treeDataBuilder'
 
 const whiteList = ['/login']
@@ -25,6 +25,7 @@ router.beforeEach(async (to, from, next) => {
     } else {
       const hasRoles = store.state.user.name
       if (hasRoles && hasRoles !== '') {
+        console.log(666, to)
         next()
       } else {
         try {
@@ -35,7 +36,11 @@ router.beforeEach(async (to, from, next) => {
               dataList: getbackEndModulesRoutes(userResp.backGroundRouteList),
               rootNode: { id: 0, name: '根节点' },
             })
-            const generateRoute = tree['treeData'][0]['children']
+            const treeRoutes = tree['treeData'][0]['children']
+            const generateRoute = treeRoutes.map((item) => {
+              item['redirect'] = setMainRouteRedirect(item, item.path)
+              return item
+            })
             router.addRoutes(generateRoute)
             store.dispatch('user/addUserRoute', generateRoute)
           }

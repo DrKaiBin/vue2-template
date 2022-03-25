@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-22 18:06:46
+ * @LastEditTime: 2022-03-25 17:54:50
  * @LastEditors: 张楷滨
  */
 // Element按需引入模块
@@ -18,6 +18,7 @@ import {
   Tooltip,
   Input,
   ColorPicker,
+  Card,
 } from 'element-ui'
 import Vue from 'vue'
 
@@ -35,3 +36,4 @@ Vue.use(Button)
   .use(Tooltip)
   .use(Input)
   .use(ColorPicker)
+  .use(Card)

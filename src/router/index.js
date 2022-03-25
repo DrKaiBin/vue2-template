@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-14 10:31:58
- * @LastEditTime: 2022-03-24 14:12:01
+ * @LastEditTime: 2022-03-25 16:41:56
  * @LastEditors: 张楷滨
  */
 /*
@@ -80,6 +80,26 @@ export const syncRoutes = [
 export let asyncRoutes = []
 
 const rolesByWeb = process.env.VUE_APP_ROLES_BY_WEB
+/**
+ * @Description: 设置主路由重定向
+ * @Author: 张楷滨
+ * @Date: 2022-03-13 17:06:57
+ * @LastEditTime: Do not edit
+ * @LastEditors: 张楷滨
+ * @param {*} route
+ */
+export function setMainRouteRedirect(route, basePath = '') {
+  let path = route.path === '/' ? '' : route.path
+  if (basePath !== '') path = basePath
+  if (route.children != null) {
+    const fristChild = route.children.find((child) => {
+      return !child.meta?.hidden
+    })
+    if (fristChild != null) path += '/' + fristChild.path
+    if (fristChild.children) path = setMainRouteRedirect(fristChild, path)
+  }
+  return path
+}
 
 /**
  * @Description: 获取路由， 此方法仅适用于前端路由。VUE_APP_ROLES_BY_WEB=true
@@ -99,8 +119,11 @@ export function getWebModulesRoutes() {
       keys.forEach((key) => {
         const element = module[key]
         // 路径设置
-        if (element.parentId === 'layout') element['path'] = '/' + element.id
-        else element['path'] = element.id
+        if (element.parentId === 'layout') {
+          element['path'] = '/' + element.id
+        } else {
+          element['path'] = element.id
+        }
         // 组件名设置
         element['name'] = key
         // meta属性设置
@@ -181,7 +204,11 @@ if (rolesByWeb === 'true') {
     dataList: getWebModulesRoutes(),
     rootNode: { id: 'layout', name: '根节点' },
   })
-  asyncRoutes = tree['treeData'][0]['children']
+  const treeRoutes = tree['treeData'][0]['children']
+  asyncRoutes = treeRoutes.map((item) => {
+    item['redirect'] = setMainRouteRedirect(item, item.path)
+    return item
+  })
 }
 
 // 创建路由

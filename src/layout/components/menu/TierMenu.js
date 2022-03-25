@@ -2,7 +2,7 @@
  * @Description: 快速生成导航栏（树形结构）
  * @Author: 张楷滨
  * @Date: 2022-03-02 11:11:28
- * @LastEditTime: 2022-03-16 15:21:46
+ * @LastEditTime: 2022-03-25 12:06:15
  * @LastEditors: 张楷滨
  */
 import { cloneDeep } from 'loadsh'
@@ -28,7 +28,7 @@ function setBaseMenu(
   menuItemProps
 ) {
   return (
-    <ElMenu attrs={props} on={onEvents}>
+    <ElMenu attrs={props} on={onEvents} router={true}>
       {routes.map((route) => {
         if (navBarType === 1)
           return setMenu(h, route, subMenuProps, menuItemProps)
@@ -43,13 +43,14 @@ function setBaseMenu(
  * @Author: 张楷滨
  * @Date: 2022-03-08 14:33:52
  * @LastEditTime: Do not edit
+ * route.redirect ? route.redirect :
  * @LastEditors: 张楷滨
  * @param {*} h 渲染函数
  * @param {*} route 路由
  * @param {*} menuItemProps element-ui <el-menu-item> 参数
  */
 function setMenuItem(h, route, menuItemProps) {
-  const index = route.redirect ? route.redirect : route.path
+  const index = route.path
   if (route.meta && route.meta.hidden && route.meta.hidden === true) return
   return (
     <ElMenuItem key={index} attrs={menuItemProps} index={index}>
