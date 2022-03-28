@@ -2,7 +2,7 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-28 19:19:59
+ * @LastEditTime: 2022-03-28 19:29:30
  * @LastEditors: 张楷滨
 -->
 
@@ -270,8 +270,7 @@ export function getValue() {
 ### 基础布局
 
 - 本模板提供了两种基础样式布局
-- 业务类布局
--
+- ## 业务类布局
 
 ## Theme 主题定制
 

@@ -2,7 +2,7 @@
  * @Description: 缺省指令
  * @Author: 张楷滨
  * @Date: 2022-03-25 16:55:44
- * @LastEditTime: 2022-03-25 18:31:28
+ * @LastEditTime: 2022-03-28 17:28:19
  * @LastEditors: 张楷滨
  */
 import { isType } from '@/utils/objUtils'
@@ -30,7 +30,6 @@ list.forEach((element) => {
  */
 export default {
   bind(el, binding) {
-    console.log('bind', binding)
     el.style.position = 'relative'
     const value = binding.value
     const isNumber = isType(binding.value, 'number')
@@ -42,7 +41,6 @@ export default {
     }
   },
   update(el, binding) {
-    console.log('update', binding)
     const value = binding.value
 
     const isNumber = isType(binding.value, 'number')

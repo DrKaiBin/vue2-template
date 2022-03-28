@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-25 17:34:04
- * @LastEditTime: 2022-03-25 18:54:03
+ * @LastEditTime: 2022-03-28 17:24:59
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -51,7 +51,7 @@ export default {
       })
     },
     simulateEmpty() {
-      console.log(6666, this.$data)
+      console.log(6666, this.listObj)
       setTimeout(() => {
         this.len = 10
         this.emptyTypes.forEach((item) => {

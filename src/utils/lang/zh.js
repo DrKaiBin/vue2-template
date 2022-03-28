@@ -2,7 +2,7 @@
  * @Description: 常用文字表达集（中文版）
  * @Author: 张楷滨
  * @Date: 2022-03-16 16:40:50
- * @LastEditTime: 2022-03-24 11:52:14
+ * @LastEditTime: 2022-03-28 19:04:11
  * @LastEditors: 张楷滨
  */
 export const zh = {
@@ -13,6 +13,12 @@ export const zh = {
     bijiben: '笔记本',
     diannao: '电脑',
     gengduo: '更多',
+    analytics: '分析',
+    increase: '递增',
+    navCollapse: '伸展',
+    presentation: '媒体',
+    timeMoney: '时间钱',
+    wallet: '钱包',
   },
   cssVariables: {
     '--color-primary': '主题色',
