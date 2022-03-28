@@ -2,7 +2,7 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-24 14:49:52
+ * @LastEditTime: 2022-03-28 19:19:59
  * @LastEditors: 张楷滨
 -->
 
@@ -256,10 +256,22 @@ export function getValue() {
   - 项目上所有图标均为无颜色，所以你需要添加一个  
     `type=""可选值：primary/success/wanring/danger/info`  
     当然如果以上颜色均不符合你的需求，你可以添加`iconStyle/iconClass`添加 color 属性颜色即可
+- 具体的模板图标库，你可直接查看主题路由模块下的`图标库`
 
 ## FormRule 表单校检
 
 ## Styles 全局样式
+
+### 全局样式注册
+
+- 默认已在该模板中加入全局变量（variables.scss），全局 mixins（mixins.scss）。你在组件中使用时，无需再次引入，直接使用即可
+- 同时，我们在写颜色，间距等用全局变量，而非自己添加。这样才能保证主题化定制功能，减少不必要开发时间
+
+### 基础布局
+
+- 本模板提供了两种基础样式布局
+- 业务类布局
+-
 
 ## Theme 主题定制
 
@@ -277,4 +289,15 @@ export function getValue() {
 暂不支持对 ElementUI 组件库进行主题定制，你需要到 [ele 官网](https://element.eleme.cn/#/zh-CN/theme/preview)，进行主题定制修改，并将下载文件后，替换掉`styles/elementUiStyle`目录下的文件
 :::
 
-## Empty 暂无
+## Empty 暂无配置及使用
+
+### 配置
+
+- 暂无样式存放于`asset/background\empty`, 你可在`前端路由`模式下，查看对应的已有样式。
+- 如果你想添加新的暂无样式，你只需将`svg`直接存放于`asset/background\empty`即可
+
+### 使用
+
+- 你需要在容器中添加指令`v-el-empty:[svg-item]="value"`
+  - svg-item：暂无 svg 的名称
+  - value: 对应数组的长度，当为`null、undefined、0`时，展示暂无样式
