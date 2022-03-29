@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-24 14:16:58
+ * @LastEditTime: 2022-03-29 15:38:33
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -14,9 +14,13 @@
         :key="color"
       >
         <el-color-picker
-          v-if="colorVariables[color].indexOf('#') !== -1"
+          v-if="
+            colorVariables[color].indexOf('#') !== -1 ||
+            colorVariables[color].indexOf('rgb') !== -1
+          "
           v-model="colorVariables[color]"
           class="picker"
+          :show-alpha="colorVariables[color].indexOf('rgb') !== -1"
           @change="changeColor"
         ></el-color-picker>
         <el-input

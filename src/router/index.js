@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-14 10:31:58
- * @LastEditTime: 2022-03-28 18:23:43
+ * @LastEditTime: 2022-03-29 11:58:31
  * @LastEditors: 张楷滨
  */
 /*
@@ -42,44 +42,6 @@ export const syncRoutes = [
         component: () => import('@/views/dashboard/index'),
         meta: {
           title: '主页',
-        },
-      },
-    ],
-  },
-  {
-    path: '/theme',
-    name: 'Theme',
-    component: () => import('@/layout/index'),
-    redirect: '/theme/themeConfig',
-    meta: {
-      title: '主题',
-    },
-    children: [
-      {
-        path: 'themeConfig',
-        name: 'ThemeConfig',
-        component: () => import('@/views/themeConfig/index'),
-        meta: {
-          title: '主题配置',
-          icon: 'timeMoney',
-        },
-      },
-      {
-        path: 'iconList',
-        name: 'IconList',
-        component: () => import('@/views/components/icons/index'),
-        meta: {
-          title: '图标库',
-          icon: 'analytics',
-        },
-      },
-      {
-        path: 'emptyStyles',
-        name: 'EmptyStyles',
-        component: () => import('@/views/components/Empty.vue'),
-        meta: {
-          title: '暂无样式',
-          icon: 'analytics',
         },
       },
     ],

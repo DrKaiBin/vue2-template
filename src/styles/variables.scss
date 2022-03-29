@@ -12,7 +12,8 @@ $root-map: ( // 主题
   --text-background: #ffffff,
   --padding-base: 4px,
   --icon-size: 20px,
-  // 框架
+  // 投影
+  --shadow: rgba(0, 0, 0, 0.1), // 框架
   // 整体背景
   --layout-background: #f9f9fb,
   // 顶部导航栏
@@ -64,6 +65,11 @@ $text-regular: var(--text-regular); // 正文、图标图列、表格、分页
 $text-secondary: var(--text-secondary); // 表头、表单、基础图标（下拉、叉）
 $text-tip-disabled: var(--text-tip-disabled); // 提示性文字、禁用文字、移上表单框颜色
 $text-background: var(--text-background); // 填充色相背景时使用
+
+$-shadow-color: var(--shadow);
+$-shadow: 0 2px 10px var(--shadow);
+$-shadow-hover: 0 2px 10px rgba($-shadow-color, .3);
+
 
 
 // 间距变量

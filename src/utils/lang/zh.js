@@ -31,6 +31,8 @@ export const zh = {
     '--text-secondary': '表格标题、表单标题、基础图标',
     '--text-tip-disabled': '提示性、禁用、移上表单框颜色、禁用图标',
     '--text-background': '填充色相背景时使用',
+    '--shadow': '卡片投影',
+    '--shadow--hover': '选中卡片投影',
     '--padding-base': '间距倍数',
     '--icon-size': '图标大小',
     '--layout-background': '框架底色',

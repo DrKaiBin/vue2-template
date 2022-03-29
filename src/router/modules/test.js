@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-15 16:38:07
+ * @LastEditTime: 2022-03-29 10:21:46
  * @LastEditors: 张楷滨
  */
 const testRoutes = {
@@ -10,7 +10,6 @@ const testRoutes = {
     id: 'testIndex',
     parentId: 'layout',
     title: '测试模块',
-    icon: 'analytics',
     component: () => import('@/layout/index'),
   },
   testSafe: {
@@ -40,7 +39,7 @@ const testRoutes = {
     parentId: 'testIndex',
     title: '测试组件3',
     icon: 'wallet',
-    component: () => import('@/views/components/Empty.vue'),
+    component: () => import('@/views/themeConfig/Empty.vue'),
   },
 }
 

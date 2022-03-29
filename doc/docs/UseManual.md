@@ -2,7 +2,7 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-28 19:29:30
+ * @LastEditTime: 2022-03-29 11:12:33
  * @LastEditors: 张楷滨
 -->
 
@@ -16,20 +16,21 @@
 
 - 直接在 `src/router/modules` 添加新模块
 - 路由模块必须为**对象**，并**默认**导出该路由模块
-- 路由中的第一个路由，默认**展示在顶部导航栏**；  
-  `parentId`必须默认为`'layout'`， `component`必须为`() => import('@/layout/index')`
-- 二级路由必须添加 `parentId`,且`parentId`为**第一个路由 id**
+- 路由模块中的第一个路由，默认**展示在顶部导航栏**  
+  且`parentId`必须默认为`'layout'`， `component`必须为`() => import('@/layout/index')`
+- 其他必须添加 `parentId`,且`parentId`为路由模块中的**第一个路由 id**
 - 对象字段名主要为获取后端路由，渲染对应组件
-- 当导航栏类型为：顶侧导航栏时，二级路由默认会以 id 值自动添加**对应的 icon**
+- 当导航栏类型为：顶侧导航栏时，二级路由需要添加**对应的 icon**
 
 **2. 路由项配置**
 
 - 为一个对象，参数如下：
 - 必选参数：
-  - id: string // 1、路由路径； 2、组件 name；
-  - parentId: string // 构建树形结构路由；
-  - component: component // 渲染页面组件;
+  - id: string // 默认作为`路由路径`与`组件 name`
+  - parentId: string // 构建树形结构路由
+  - component: component // 渲染页面组件
 - 可选参数：
+  - icon: string // 图标名称，仅在二级路由体现
   - title：string // 展示于导航栏的标题，默认为：‘未设置标题’
   - hidden: boolean // 是否将其隐藏，不显示在导航栏上
 
@@ -51,6 +52,7 @@ const utilRoutes = {
     id: 'utilSafe',
     parentId: 'utilIndex',
     title: '工具安全',
+    icon: 'analytics',
     component: () => import('@/views/dashboard/index'),
   },
   util666: {
@@ -102,6 +104,10 @@ export default utilRoutes
 **3. SUCCESS**
 
 - 配完以上步骤后，路由模块便自动注册到 router 中！
+
+:::tip
+使用后端路由，请在 env 环境下将 VUE_APP_ROLES_BY_WEB 设置为 false
+:::
 
 ## Vuex 全局状态管理模块
 
@@ -270,7 +276,8 @@ export function getValue() {
 ### 基础布局
 
 - 本模板提供了两种基础样式布局
-- ## 业务类布局
+- 业务类布局
+- 展示类布局
 
 ## Theme 主题定制
 
