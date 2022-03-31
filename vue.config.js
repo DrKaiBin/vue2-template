@@ -2,7 +2,7 @@
  * @Description: vuecli配置
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-23 15:33:26
+ * @LastEditTime: 2022-03-31 16:28:05
  * @LastEditors: 张楷滨
  */
 const path = require('path')
@@ -31,6 +31,14 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+function setWholeCss() {
+  let cssStr = '@import "~@/styles/mixins.scss";'
+  if (process.env.VUE_APP_SUPPORT_IE !== 'true')
+    cssStr += '@import "~@/styles/variables.scss";'
+  else cssStr += '@import "~@/styles/ie-variables.scss";'
+  return cssStr
+}
+
 module.exports = {
   devServer: {
     open: true,
@@ -41,7 +49,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        prependData: `@import "~@/styles/mixins.scss";@import "~@/styles/variables.scss";`,
+        prependData: setWholeCss(),
       },
     },
   },

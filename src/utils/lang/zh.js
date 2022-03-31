@@ -2,7 +2,7 @@
  * @Description: 常用文字表达集（中文版）
  * @Author: 张楷滨
  * @Date: 2022-03-16 16:40:50
- * @LastEditTime: 2022-03-28 19:04:11
+ * @LastEditTime: 2022-03-31 16:10:15
  * @LastEditors: 张楷滨
  */
 export const zh = {
@@ -31,6 +31,11 @@ export const zh = {
     '--text-secondary': '表格标题、表单标题、基础图标',
     '--text-tip-disabled': '提示性、禁用、移上表单框颜色、禁用图标',
     '--text-background': '填充色相背景时使用',
+    '--border-default': '默认边框',
+    '--border-second': '二级边框',
+    '--border-third': '三级边框',
+    '--border-fourth': '四级边框',
+
     '--shadow': '卡片投影',
     '--shadow--hover': '选中卡片投影',
     '--padding-base': '间距倍数',

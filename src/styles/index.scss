@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-31 15:38:49
+ * @LastEditTime: 2022-03-31 16:31:37
  * @LastEditors: 张楷滨
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \vue2-template\src\styles\index.scss
  */
 @import './element-ui.scss';
-@import './variables.scss';
+// @import './variables.scss';
 
 html,
 body {
@@ -272,7 +272,7 @@ div {
 
     // 路由渲染区域
     .render-view {
-      height: 100%;
+      height: calc(100% - 34px);
       float: left;
       padding: $padding-base * 6;
     }
@@ -334,6 +334,9 @@ div {
   }
 }
 
+/**
+  * 内容域布局
+  **/
 .tm-base {
   @include wh100();
 
