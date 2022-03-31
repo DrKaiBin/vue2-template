@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-25 17:34:04
- * @LastEditTime: 2022-03-28 17:24:59
+ * @LastEditTime: 2022-03-31 15:04:19
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -29,19 +29,22 @@ export default {
       emptyTypes: [],
       emptyRecord: 'emptyRecord',
       listObj: {},
+      mockInterval: null,
     }
   },
   created() {
     this.getAllEmptyTypes()
   },
   mounted() {
-    setInterval(this.simulateEmpty, 15000)
+    this.mockInterval = setInterval(this.simulateEmpty, 15000)
+  },
+  destroyed() {
+    clearInterval(this.mockInterval)
   },
   methods: {
     getAllEmptyTypes() {
       const req = require.context('@/assets/backgrounds/empty', false, /\.svg$/)
       const list = req.keys()
-      console.log(this.$data)
       list.forEach((element) => {
         const iArr = element.split('/')
         const fileFullName = iArr[1]
@@ -51,7 +54,6 @@ export default {
       })
     },
     simulateEmpty() {
-      console.log(6666, this.listObj)
       setTimeout(() => {
         this.len = 10
         this.emptyTypes.forEach((item) => {

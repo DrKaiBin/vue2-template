@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-29 14:35:17
- * @LastEditTime: 2022-03-29 15:45:22
+ * @LastEditTime: 2022-03-29 17:45:06
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -59,13 +59,13 @@ export default {
 
 <style lang="scss" scoped>
 .box-drawer {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   background-color: white;
   position: fixed;
   right: 0;
   top: 20%;
-  box-shadow: $-shadow;
+  box-shadow: $shadow;
   padding: 10px;
   cursor: pointer;
   .config-button {

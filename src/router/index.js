@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-14 10:31:58
- * @LastEditTime: 2022-03-29 11:58:31
+ * @LastEditTime: 2022-03-31 15:33:13
  * @LastEditors: 张楷滨
  */
 /*
@@ -27,6 +27,19 @@ Vue.use(Router)
 
 // 路由列表
 export const syncRoutes = [
+  {
+    path: '/redirect',
+    component: () => import('@/layout/index'),
+    meta: {
+      hidden: true,
+    },
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/components/Redirect'),
+      },
+    ],
+  },
   {
     path: '/',
     name: 'Dashboard',

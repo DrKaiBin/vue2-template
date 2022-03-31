@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-25 18:23:39
+ * @LastEditTime: 2022-03-31 15:38:49
  * @LastEditors: 张楷滨
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \vue2-template\src\styles\index.scss
@@ -265,11 +265,16 @@ div {
       }
     }
 
+    .tags-view {
+      height: 34px;
+      float: left;
+    }
+
     // 路由渲染区域
     .render-view {
       height: 100%;
       float: left;
-      padding: 20px;
+      padding: $padding-base * 6;
     }
 
     $side-menu-open-collapse--width: 64px;
@@ -289,13 +294,14 @@ div {
         .el-menu {
           .el-submenu {
             &__title {
-              padding: 0 20px !important;
+              padding: 0 $padding-base * 5 !important;
             }
           }
         }
       }
 
       // 路由渲染区域
+      .tags-view,
       .render-view {
         width: calc(100% - $side-menu-open-collapse--width);
       }
@@ -310,6 +316,7 @@ div {
       }
 
       // 路由渲染区域
+      .tags-view,
       .render-view {
         width: calc(100% - $side-menu-close-collapse--width);
       }
@@ -317,10 +324,160 @@ div {
 
     // 无侧边栏
     &.has-side-menu {
+
+      .tags-view,
       .render-view {
         width: 100%;
         height: 100%;
       }
+    }
+  }
+}
+
+.tm-base {
+  @include wh100();
+
+  border-radius: 4px;
+
+  .manager-layout {
+    @include wh100();
+    box-shadow: $shadow;
+    padding: $padding-base * 2.5;
+
+    $margin: $padding-base * 2.5;
+    $header-height: 32px;
+    $header-height-more: $header-height * 2 + $padding-base * 2;
+    $footer-height: 32px;
+    overflow: hidden;
+
+    &__header {
+      width: calc(100% - $margin * 2);
+      height: $header-height;
+      margin: $margin;
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: height ease-in-out .5s;
+
+      .left-condition {
+        display: flex;
+        align-items: center;
+      }
+
+      .right-button {
+        display: flex;
+        align-items: center;
+        margin-left: $padding-base * 6;
+      }
+
+      .item {
+        display: flex;
+        width: 240px;
+        height: 32px;
+
+        &:not(.item:first-of-type) {
+          margin-left: $padding-base * 4;
+        }
+
+        &-label {
+          float: left;
+          color: $text-regular;
+          font-size: 14px;
+          height: 32px;
+          margin-right: $padding-base * 3;
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+        }
+
+        &-value {
+          float: left;
+        }
+      }
+
+      // 存在高级筛选
+      &.more {
+        display: block;
+
+        .default-condition {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .more-condition {
+          width: 100%;
+          height: $header-height;
+          margin-top: $padding-base * 2;
+          display: flex;
+        }
+      }
+
+      &.manager-layout__header--more {
+        height: $header-height-more;
+
+        &+.manager-layout__body {
+          height: calc(100% - $header-height-more - $footer-height - $margin * 6);
+        }
+      }
+    }
+
+    &__body {
+      width: calc(100% - $margin * 2);
+      height: calc(100% - $header-height - $footer-height - $margin * 6);
+      margin: $margin;
+      float: left;
+      overflow: hidden;
+
+      .table {
+        @include wh100();
+        transition: none;
+      }
+
+      .batch-handle {
+        width: 100%;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $border-default;
+        border-bottom: none;
+        transition: margin-top ease-in-out .5s;
+        margin-top: -32px;
+      }
+
+      &.show-batch-handle {
+        .batch-handle {
+          margin-top: 0;
+        }
+
+        .batch-handle+.table {
+          width: 100%;
+          height: calc(100% - 32px);
+        }
+      }
+    }
+
+    &__body--without-footer {
+      @extend .manager-layout__body;
+      height: calc(100% - $header-height - $footer-height - $margin * 4);
+    }
+
+    &__footer {
+      width: calc(100% - $margin * 2);
+      height: $footer-height;
+      margin: $padding-base * 2.5;
+      float: left;
+    }
+  }
+
+  .modular-layout {
+    @include wh100();
+    $margin: $padding-base * 2.5;
+
+    .modular-layout-item {
+      box-shadow: $shadow;
+      margin: $margin;
+      float: left;
     }
   }
 }

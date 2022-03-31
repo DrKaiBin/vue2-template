@@ -2,7 +2,7 @@
  * @Description: 项目使用
  * @Author: 张楷滨
  * @Date: 2022-03-08 16:58:06
- * @LastEditTime: 2022-03-29 11:12:33
+ * @LastEditTime: 2022-03-30 14:27:55
  * @LastEditors: 张楷滨
 -->
 
@@ -277,6 +277,79 @@ export function getValue() {
 
 - 本模板提供了两种基础样式布局
 - 业务类布局
+
+  - 常用于表格类
+    - 默认布局示例如下
+    ```html
+    <div class="tm-base">
+      <div class="manager-layout">
+        <!-- 头部-主要用于条件搜索、操作之类 -->
+        <div class="manager-layout__header">
+          <!-- 左筛选 -->
+          <div class="left-condition">
+            <div class="item"></div>
+          </div>
+          <!-- 右按钮 -->
+          <div class="right-button">
+            <el-button type="success" plain>添加</el-button>
+          </div>
+        </div>
+        <!-- 驱干-主要用于表格之类，如果没有脚本，你直接将 class="manager-layout__body--without-footer" 即可 -->
+        <div class="manager-layout__body"></div>
+        <!-- 脚部 -->
+        <div class="manager-layout__footer"></div>
+      </div>
+    </div>
+    ```
+    - 带高级条件、带批量操作类型
+    ```html
+    <div class="tm-base">
+      <div class="manager-layout">
+        <!-- 高级筛选，必须添加，'more'，以及
+         { 'manager-layout__header--more': showMore } -->
+        <div
+          :class="[
+          'manager-layout__header',
+          'more',
+          { 'manager-layout__header--more': showMore },
+        ]"
+        >
+          <!-- 默认展示条件 -->
+          <div class="default-condition">
+            <div class="left-condition"></div>
+            <div class="right-button"></div>
+          </div>
+          <!-- 高级条件 -->
+          <div class="more-condition">
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+        </div>
+        <!-- 批量操作 -->
+        <div class="manager-layout__body">
+          <!-- 你需要添加两个外层元素， 一个包裹操作 class="batch-handle"，一个包裹内容class="table" -->
+          <div :class="[{ 'batch-handle': batchHandle }]" v-show="batchHandle">
+            xxxx
+          </div>
+          <div class="table"></div>
+        </div>
+        <div class="manager-layout__footer"></div>
+      </div>
+    </div>
+    ```
+    - 你也可以使用已写好的模板，在`@/components/BusinessLayout`
+    ```html
+    <!-- 仅需传入两个参数，show-more: 展示高级条件、show-batch-handle：展示批量操作 -->
+    <business-layout :show-more="showMore" :show-batch-handle="batchHandle">
+      <template #left-condition>...</template>
+      <template #right-button>...</template>
+      <template #more-condition>...</template>
+      <template #batch-handle>...</template>
+      <template #table>...</template>
+      <template #footer>...</template>
+    </business-layout>
+    ```
+
 - 展示类布局
 
 ## Theme 主题定制

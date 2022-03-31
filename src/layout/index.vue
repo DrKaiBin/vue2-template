@@ -11,9 +11,6 @@
         />
       </div>
       <base-info></base-info>
-      <!-- <div class="config">
-        <el-button type="primary" @click="openConfigDrawer">配置</el-button>
-      </div> -->
     </div>
     <div
       :class="[
@@ -28,11 +25,14 @@
         :defaultOpeneds="$route.path"
         :collapse="sidebarCollapse"
       />
+      <div class="tags-view">
+        <tags-view></tags-view>
+      </div>
       <div class="render-view">
         <router-view></router-view>
       </div>
     </div>
-    <config-drawer ref="configDrawer"></config-drawer>
+    <config-drawer ref="configDrawer" v-if="canSetting"></config-drawer>
   </div>
 </template>
 
@@ -42,6 +42,7 @@ import LogoInfo from './components/config/LogoInfo.vue'
 import TopMenu from './components/menu/TopMenu.vue'
 import SideMenu from './components/menu/SideMenu.vue'
 import BaseInfo from './components/config/BaseInfo.vue'
+import TagsView from './components/tagsView/index.vue'
 import ConfigDrawer from '@/components/ConfigDrawer.vue'
 import { cloneDeep } from 'loadsh'
 export default {
@@ -51,6 +52,7 @@ export default {
     TopMenu,
     SideMenu,
     BaseInfo,
+    TagsView,
     ConfigDrawer,
   },
   data() {
@@ -63,9 +65,6 @@ export default {
   computed: {
     menuRoutes() {
       const _routes = this.userRoutes.filter((item) => {
-        // if (!item.meta?.hidden) {
-        //   item.redirect = this.setMainRouteRedirect(item)
-        // }
         return !item.meta?.hidden
       })
       return _routes
@@ -77,10 +76,12 @@ export default {
     sidebarCollapse() {
       return this.$store.state.config.sidebarCollapse
     },
+    canSetting() {
+      return process.env.VUE_APP_SETTING_BY_WEB === 'true'
+    },
     ...mapGetters(['navBarType', 'userRoutes']),
   },
   created() {
-    console.log(888, this.$route)
     this.changeTopMenuItem(this.$route.path, false)
   },
   methods: {
@@ -133,7 +134,6 @@ export default {
       }
       this.$nextTick(() => {
         this.defaultOpeneds = indexPath
-        console.log(2333, this.defaultOpeneds)
       })
     },
   },

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-02-28 19:09:07
- * @LastEditTime: 2022-03-25 16:40:59
+ * @LastEditTime: 2022-03-29 16:48:37
  * @LastEditors: 张楷滨
  */
 // const routes = [...syncRoutes, ...asyncRoutes]
@@ -25,7 +25,6 @@ router.beforeEach(async (to, from, next) => {
     } else {
       const hasRoles = store.state.user.name
       if (hasRoles && hasRoles !== '') {
-        console.log(666, to)
         next()
       } else {
         try {

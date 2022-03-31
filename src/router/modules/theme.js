@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 张楷滨
  * @Date: 2022-03-01 10:51:34
- * @LastEditTime: 2022-03-29 14:34:30
+ * @LastEditTime: 2022-03-30 14:30:29
  * @LastEditors: 张楷滨
  */
 const themeRoutes = {
@@ -32,6 +32,25 @@ const themeRoutes = {
     title: '暂无样式',
     icon: 'empty',
     component: () => import('@/views/themeConfig/Empty.vue'),
+  },
+  layoutTypes: {
+    id: 'layoutTypes',
+    parentId: 'theme',
+    title: '布局类型',
+    icon: 'empty',
+    component: () => import('@/views/themeConfig/layout/index'),
+  },
+  businessLayout: {
+    id: 'businessLayout',
+    parentId: 'layoutTypes',
+    title: '业务型布局',
+    component: () => import('@/views/themeConfig/layout/BusinessLayout'),
+  },
+  modularLayout: {
+    id: 'modularLayout',
+    parentId: 'layoutTypes',
+    title: '模块型布局',
+    component: () => import('@/views/themeConfig/layout/ModularLayout'),
   },
 }
 

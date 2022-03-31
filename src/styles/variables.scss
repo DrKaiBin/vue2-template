@@ -10,6 +10,12 @@ $root-map: ( // 主题
   --text-secondary: #909399,
   --text-tip-disabled: #c0c4cc,
   --text-background: #ffffff,
+  // 边框
+  --border-default: #dcdfe6,
+  --border-second: #e4e7ed,
+  --border-third: #ebeef5,
+  --border-fourth: #f2f6fc,
+
   --padding-base: 4px,
   --icon-size: 20px,
   // 投影
@@ -66,9 +72,15 @@ $text-secondary: var(--text-secondary); // 表头、表单、基础图标（下�
 $text-tip-disabled: var(--text-tip-disabled); // 提示性文字、禁用文字、移上表单框颜色
 $text-background: var(--text-background); // 填充色相背景时使用
 
-$-shadow-color: var(--shadow);
-$-shadow: 0 2px 10px var(--shadow);
-$-shadow-hover: 0 2px 10px rgba($-shadow-color, .3);
+// 边框
+$border-default: var(--border-default);
+$border-second: var(--border-second);
+$border-third: var(--border-third);
+$border-fourth: var(--border-fourth);
+
+$shadow-color: var(--shadow);
+$shadow: 0 2px 10px var(--shadow);
+$shadow-hover: 0 2px 10px rgba($shadow-color, .3);
 
 
 

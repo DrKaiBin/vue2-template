@@ -2,7 +2,7 @@
  * @Description: 快速生成导航栏（树形结构）
  * @Author: 张楷滨
  * @Date: 2022-03-02 11:11:28
- * @LastEditTime: 2022-03-25 12:06:15
+ * @LastEditTime: 2022-03-29 16:47:32
  * @LastEditors: 张楷滨
  */
 import { cloneDeep } from 'loadsh'
@@ -77,9 +77,7 @@ function setMenuItem(h, route, menuItemProps) {
  * @param {*} menuItemProps element-ui <el-menu-item> 参数
  */
 function setMenu(h, route, subMenuProps, menuItemProps) {
-  if (route.children == null || route.children.length < 2) {
-    return setMenuItem(h, route, menuItemProps)
-  } else {
+  if (route.children != null) {
     return (
       <ElSubmenu index={route.name} attrs={subMenuProps}>
         <template slot="title">
@@ -94,6 +92,8 @@ function setMenu(h, route, subMenuProps, menuItemProps) {
         })}
       </ElSubmenu>
     )
+  } else {
+    return setMenuItem(h, route, menuItemProps)
   }
 }
 
