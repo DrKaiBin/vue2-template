@@ -59,7 +59,7 @@ export function request(axiosConfig, customOptions, loadingOptions) {
     mergeCustomOptions.repeatequestancel && removePending(config) // 删除重复请求
     mergeCustomOptions.repeatequestancel && addPending(config) // 添加重复请求
 
-    config['headers']
+    config['headers'] = {}
     // mergeCustomOptions.loading为true, 创建loading实例
     if (mergeCustomOptions.loading) {
       LoadingInstance._count++

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 张楷滨
  * @Date: 2022-03-29 16:10:26
- * @LastEditTime: 2022-03-30 14:34:00
+ * @LastEditTime: 2022-04-01 16:49:08
  * @LastEditors: 张楷滨
 -->
 <template>
@@ -24,8 +24,8 @@ export default {}
 .tm-base {
   .modular-layout {
     .modular-layout-item {
-      width: calc(50% - $padding-base * 5);
-      height: calc(50% - $padding-base * 5);
+      width: calc(50% - $padding-base * 6);
+      height: calc(50% - $padding-base * 6);
     }
   }
 }

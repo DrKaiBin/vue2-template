@@ -1,6 +1,6 @@
 <template>
-  <div class="app-main">
-    <div class="header">
+  <div :class="['app-main', { 'is-only-content-show': onlyShowContentView }]">
+    <div class="header" v-if="!onlyShowContentView">
       <logo-info></logo-info>
       <div class="menu" :key="navBarType">
         <top-menu
@@ -20,12 +20,14 @@
       ]"
     >
       <side-menu
-        v-if="navBarType === 2 && sideRoutes.length >= 1"
+        v-if="
+          !onlyShowContentView && navBarType === 2 && sideRoutes.length >= 1
+        "
         :sideRoutes="sideRoutes"
         :defaultOpeneds="$route.path"
         :collapse="sidebarCollapse"
       />
-      <div class="tags-view">
+      <div v-if="!onlyShowContentView" class="tags-view">
         <tags-view></tags-view>
       </div>
       <div class="render-view">
@@ -78,6 +80,9 @@ export default {
     },
     canSetting() {
       return process.env.VUE_APP_SETTING_BY_WEB === 'true'
+    },
+    onlyShowContentView() {
+      return process.env.VUE_APP_ONLY_CONTENT_VIEW === 'true'
     },
     ...mapGetters(['navBarType', 'userRoutes']),
   },
